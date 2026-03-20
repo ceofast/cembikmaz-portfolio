@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from '../i18n/LanguageContext'
 import useInView from '../hooks/useInView'
@@ -28,6 +29,13 @@ function AnimatedStat({ value, label, inView }) {
 export default function Hero() {
   const { t } = useTranslation()
   const [statsRef, statsInView] = useInView()
+  const [scrollY, setScrollY] = useState(0)
+
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const stats = [
     { value: '3+', label: t('hero.stat1') },
@@ -41,18 +49,20 @@ export default function Hero() {
       minHeight: '100vh', display: 'flex', alignItems: 'center',
       padding: '140px 32px 100px', position: 'relative', overflow: 'hidden',
     }}>
-      {/* Subtle mesh gradient background */}
-      <div style={{
+      {/* Animated mesh gradient background */}
+      <div className="hero-orb hero-orb-1" style={{
         position: 'absolute', top: '-20%', right: '-10%',
         width: 800, height: 800, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(0,113,227,0.04) 0%, transparent 60%)',
+        background: 'radial-gradient(circle, rgba(0,113,227,0.05) 0%, transparent 60%)',
         filter: 'blur(60px)', pointerEvents: 'none',
+        transform: `translateY(${scrollY * 0.08}px)`,
       }} />
-      <div style={{
+      <div className="hero-orb hero-orb-2" style={{
         position: 'absolute', bottom: '-10%', left: '-10%',
         width: 600, height: 600, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(147,51,234,0.03) 0%, transparent 60%)',
+        background: 'radial-gradient(circle, rgba(147,51,234,0.04) 0%, transparent 60%)',
         filter: 'blur(60px)', pointerEvents: 'none',
+        transform: `translateY(${scrollY * -0.05}px)`,
       }} />
 
       <div style={{
@@ -134,9 +144,11 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Profile photo */}
+          {/* Profile photo with parallax */}
           <div className="hero-photo" style={{
             animation: 'fadeIn 1s cubic-bezier(0.25,0.1,0.25,1) 0.3s both',
+            transform: `translateY(${scrollY * 0.06}px)`,
+            transition: 'transform 0s',
           }}>
             <div style={{
               width: 280, height: 340,

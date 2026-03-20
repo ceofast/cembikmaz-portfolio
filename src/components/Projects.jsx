@@ -67,7 +67,7 @@ export default function Projects() {
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="card"
+            className="card card-project"
             style={{
               display: 'flex', flexDirection: 'column', textDecoration: 'none',
               cursor: 'pointer',
@@ -83,9 +83,9 @@ export default function Projects() {
                 background: 'rgba(0,113,227,0.06)', color: 'var(--accent)',
                 letterSpacing: 0.3,
               }}>{project.category}</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+              <svg className="project-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"
                 stroke="var(--text-muted)" strokeWidth="1.5" strokeLinecap="round"
-                style={{ opacity: 0.4 }}>
+                style={{ opacity: 0.4, transition: 'all 0.3s ease' }}>
                 <path d="M7 17L17 7M17 7H7M17 7v10" />
               </svg>
             </div>

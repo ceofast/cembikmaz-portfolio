@@ -154,6 +154,8 @@
   "contact.form.sending": "Wird gesendet...",
   "contact.form.success": "Ihre Nachricht wurde erfolgreich gesendet. Ich melde mich in Kürze.",
   "contact.form.error": "Nachricht konnte nicht gesendet werden. Bitte kontaktieren Sie mich per E-Mail.",
+  "contact.form.file": "Anhang (optional)",
+  "contact.form.fileHint": "PDF, DOC oder Bild anhängen",
 
   "blog.search": "Artikel suchen...",
   "blog.filter.all": "Alle",

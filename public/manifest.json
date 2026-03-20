@@ -1,0 +1,17 @@
+{
+  "name": "Cem Bıkmaz — Data Scientist & ML Engineer",
+  "short_name": "Cem Bıkmaz",
+  "description": "Data Scientist & ML Engineer. Predictive maintenance, computer vision, LLM fine-tuning, and end-to-end AI solutions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

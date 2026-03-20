@@ -154,6 +154,8 @@
   "contact.form.sending": "Sending...",
   "contact.form.success": "Your message was sent successfully. I'll get back to you soon.",
   "contact.form.error": "Failed to send message. Please reach out via email.",
+  "contact.form.file": "Attachment (optional)",
+  "contact.form.fileHint": "Attach PDF, DOC, or image",
 
   "blog.search": "Search articles...",
   "blog.filter.all": "All",

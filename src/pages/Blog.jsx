@@ -41,7 +41,7 @@ export default function Blog() {
         </div>
       </div>
 
-      <Articles searchQuery={search} activeCategory={activeCategory} onCategoryChange={setActiveCategory} showCategoryFilter />
+      <Articles searchQuery={search} activeCategory={activeCategory} onCategoryChange={setActiveCategory} showCategoryFilter gridLayout />
       <Footer />
     </main>
   )

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from '../i18n/LanguageContext'
 import LanguageSwitcher from './LanguageSwitcher'
@@ -17,6 +17,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState(null)
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 })
+  const navRef = useRef(null)
   const location = useLocation()
   const { t } = useTranslation()
 
@@ -48,6 +50,23 @@ export default function Navbar() {
     sections.forEach(s => observer.observe(s))
     return () => observer.disconnect()
   }, [location.pathname])
+
+  // Update indicator position
+  useEffect(() => {
+    if (!navRef.current) return
+    const activeLink = navRef.current.querySelector('[data-active="true"]')
+    if (activeLink) {
+      const navRect = navRef.current.getBoundingClientRect()
+      const linkRect = activeLink.getBoundingClientRect()
+      setIndicatorStyle({
+        left: linkRect.left - navRect.left,
+        width: linkRect.width,
+        opacity: 1,
+      })
+    } else {
+      setIndicatorStyle(prev => ({ ...prev, opacity: 0 }))
+    }
+  }, [activeSection, location.pathname])
 
   useEffect(() => { setMenuOpen(false) }, [location])
 
@@ -87,19 +106,31 @@ export default function Navbar() {
           Cem Bıkmaz
         </Link>
 
-        <div style={{
+        <div ref={navRef} style={{
           display: 'flex', alignItems: 'center', gap: 28,
+          position: 'relative',
         }} className="desktop-nav">
+          {/* Sliding indicator */}
+          <div style={{
+            position: 'absolute', bottom: -6, height: 2,
+            background: 'var(--accent)', borderRadius: 1,
+            transition: 'all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)',
+            left: indicatorStyle.left,
+            width: indicatorStyle.width,
+            opacity: indicatorStyle.opacity,
+          }} />
+
           {navKeys.map(link => (
             <Link
               key={link.key}
+              data-active={isActive(link)}
               to={link.href.startsWith('/#') ? '/' : link.href}
               onClick={(e) => handleNavClick(e, link.href)}
               style={{
                 fontSize: 13, fontWeight: isActive(link) ? 600 : 400,
                 color: isActive(link) ? 'var(--text)' : 'var(--text-muted)',
                 transition: 'color 0.2s',
-                position: 'relative',
+                position: 'relative', paddingBottom: 2,
               }}
               onMouseEnter={e => e.target.style.color = 'var(--text)'}
               onMouseLeave={e => { if (!isActive(link)) e.target.style.color = 'var(--text-muted)' }}
@@ -149,13 +180,17 @@ export default function Navbar() {
               to={link.href.startsWith('/#') ? '/' : link.href}
               onClick={(e) => handleNavClick(e, link.href)}
               style={{
-                display: 'block', padding: '14px 0', fontSize: 16, fontWeight: 500,
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                padding: '14px 0', fontSize: 16, fontWeight: 500,
                 color: isActive(link) ? 'var(--text)' : 'var(--text-secondary)',
                 borderBottom: '1px solid var(--border)',
                 animation: `fadeInUp 0.3s ease ${i * 0.04}s both`,
               }}
             >
               {t(link.key)}
+              {isActive(link) && (
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--accent)' }} />
+              )}
             </Link>
           ))}
         </div>

@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import { lazy, Suspense, useEffect } from 'react'
 import { LanguageProvider, useTranslation } from './i18n/LanguageContext'
 import ErrorBoundary from './components/ErrorBoundary'
+import SplashScreen from './components/SplashScreen'
 import Navbar from './components/Navbar'
 import BackToTop from './components/BackToTop'
 import Home from './pages/Home'
@@ -75,6 +76,7 @@ export default function App() {
   return (
     <ErrorBoundary>
       <LanguageProvider>
+        <SplashScreen />
         <AppContent />
       </LanguageProvider>
     </ErrorBoundary>

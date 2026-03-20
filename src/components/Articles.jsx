@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from '../i18n/LanguageContext'
 import useInView from '../hooks/useInView'
 
-export default function Articles({ limit, searchQuery = '', activeCategory = null, onCategoryChange, showCategoryFilter = false }) {
+export default function Articles({ limit, searchQuery = '', activeCategory = null, onCategoryChange, showCategoryFilter = false, gridLayout = false }) {
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(true)
   const { t, lang } = useTranslation()
@@ -95,68 +95,96 @@ export default function Articles({ limit, searchQuery = '', activeCategory = nul
         </div>
       )}
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div className={gridLayout ? 'articles-grid' : ''} style={gridLayout
+        ? { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }
+        : { display: 'flex', flexDirection: 'column', gap: 10 }
+      }>
         {display.map((article, i) => (
-          <Link
-            key={i}
-            to={`/blog/${article.slug}`}
-            className="card article-card"
-            style={{
-              display: 'grid', gridTemplateColumns: article.thumbnail ? '100px 1fr auto' : '1fr auto',
-              gap: 20, alignItems: 'center', textDecoration: 'none', cursor: 'pointer',
-            }}
-          >
-            {article.thumbnail && (
-              <div style={{
-                width: 100, height: 68, borderRadius: 'var(--radius-sm)',
-                overflow: 'hidden', flexShrink: 0,
-              }}>
-                <img
-                  src={article.thumbnail}
-                  alt=""
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  loading="lazy"
-                />
+          gridLayout ? (
+            <Link
+              key={i}
+              to={`/blog/${article.slug}`}
+              className="card blog-grid-card"
+              style={{ textDecoration: 'none', cursor: 'pointer' }}
+            >
+              {article.thumbnail && (
+                <div className="blog-thumb" style={{
+                  height: 180, borderRadius: '14px 14px 0 0',
+                  overflow: 'hidden', margin: '-28px -30px 20px',
+                }}>
+                  <img src={article.thumbnail} alt="" loading="lazy"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+              )}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>{formatDate(article.pubDate, lang)}</span>
+                <span style={{ fontSize: 11, color: 'var(--accent)', fontWeight: 500 }}>{article.readTime}</span>
               </div>
-            )}
-            <div>
-              <div style={{
-                display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6,
-              }}>
-                <span style={{
-                  fontSize: 13, color: 'var(--text-muted)',
-                }}>{formatDate(article.pubDate, lang)}</span>
-                <span style={{
-                  fontSize: 12, color: 'var(--accent)',
-                  fontWeight: 500,
-                }}>{article.readTime}</span>
-              </div>
-              <h3 style={{
-                fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 6,
-                lineHeight: 1.4,
-              }}>{article.title}</h3>
+              <h3 style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 8, lineHeight: 1.35 }}>
+                {article.title}
+              </h3>
               <p style={{
-                fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.6,
-                display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
-                overflow: 'hidden',
+                fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.6, flex: 1,
+                display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden',
               }}>{article.description}</p>
               {article.categories.length > 0 && (
-                <div style={{ display: 'flex', gap: 6, marginTop: 10, flexWrap: 'wrap' }}>
-                  {article.categories.slice(0, 4).map(tag => (
+                <div style={{ display: 'flex', gap: 6, marginTop: 14, flexWrap: 'wrap' }}>
+                  {article.categories.slice(0, 3).map(tag => (
                     <span key={tag} style={{
-                      padding: '2px 8px', borderRadius: 6, fontSize: 11, fontWeight: 500,
-                      background: 'var(--bg)', color: 'var(--text-muted)',
+                      padding: '3px 10px', borderRadius: 6, fontSize: 11, fontWeight: 500,
+                      background: 'var(--bg-soft)', color: 'var(--text-muted)',
                     }}>{tag}</span>
                   ))}
                 </div>
               )}
-            </div>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-              stroke="var(--text-muted)" strokeWidth="1.5" strokeLinecap="round"
-              style={{ flexShrink: 0, opacity: 0.3 }}>
-              <path d="M9 18l6-6-6-6" />
-            </svg>
-          </Link>
+            </Link>
+          ) : (
+            <Link
+              key={i}
+              to={`/blog/${article.slug}`}
+              className="card article-card"
+              style={{
+                display: 'grid', gridTemplateColumns: article.thumbnail ? '100px 1fr auto' : '1fr auto',
+                gap: 20, alignItems: 'center', textDecoration: 'none', cursor: 'pointer',
+              }}
+            >
+              {article.thumbnail && (
+                <div style={{
+                  width: 100, height: 68, borderRadius: 'var(--radius-sm)',
+                  overflow: 'hidden', flexShrink: 0,
+                }}>
+                  <img src={article.thumbnail} alt="" loading="lazy"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+              )}
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 6 }}>
+                  <span style={{ fontSize: 13, color: 'var(--text-muted)' }}>{formatDate(article.pubDate, lang)}</span>
+                  <span style={{ fontSize: 12, color: 'var(--accent)', fontWeight: 500 }}>{article.readTime}</span>
+                </div>
+                <h3 style={{ fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 6, lineHeight: 1.4 }}>{article.title}</h3>
+                <p style={{
+                  fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.6,
+                  display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+                }}>{article.description}</p>
+                {article.categories.length > 0 && (
+                  <div style={{ display: 'flex', gap: 6, marginTop: 10, flexWrap: 'wrap' }}>
+                    {article.categories.slice(0, 4).map(tag => (
+                      <span key={tag} style={{
+                        padding: '2px 8px', borderRadius: 6, fontSize: 11, fontWeight: 500,
+                        background: 'var(--bg)', color: 'var(--text-muted)',
+                      }}>{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="var(--text-muted)" strokeWidth="1.5" strokeLinecap="round"
+                style={{ flexShrink: 0, opacity: 0.3 }}>
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </Link>
+          )
         ))}
       </div>
 
@@ -189,6 +217,7 @@ export default function Articles({ limit, searchQuery = '', activeCategory = nul
           .article-card img { width: 100% !important; height: 160px !important; }
           .article-card > div:first-child { width: 100% !important; height: 160px !important; }
           .article-card > svg:last-child { display: none !important; }
+          .articles-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </section>

@@ -6,6 +6,7 @@ import useInView from '../hooks/useInView'
 export default function Contact() {
   const { t } = useTranslation()
   const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [file, setFile] = useState(null)
   const [status, setStatus] = useState(null)
   const [ref, inView] = useInView()
 
@@ -20,6 +21,11 @@ export default function Contact() {
         message: DOMPurify.sanitize(form.message.trim()),
       }
 
+      if (file) {
+        sanitized.fileName = file.name
+        sanitized.fileSize = file.size
+      }
+
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -29,6 +35,7 @@ export default function Contact() {
       if (!res.ok) throw new Error('Failed')
       setStatus('success')
       setForm({ name: '', email: '', message: '' })
+      setFile(null)
     } catch {
       setStatus('error')
     }
@@ -129,6 +136,44 @@ export default function Contact() {
                 style={{ ...inputStyle, resize: 'vertical', minHeight: 120 }}
                 onFocus={e => { e.target.style.borderColor = 'var(--accent)'; e.target.style.boxShadow = '0 0 0 3px rgba(0,113,227,0.1)' }}
                 onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none' }}
+              />
+            </div>
+
+            {/* File attachment */}
+            <div>
+              <label htmlFor="contact-file" style={{
+                display: 'block', fontSize: 13, fontWeight: 500, color: 'var(--text-secondary)',
+                marginBottom: 6,
+              }}>{t('contact.form.file')}</label>
+              <div style={{
+                position: 'relative', display: 'flex', alignItems: 'center', gap: 12,
+                padding: '12px 18px', background: 'var(--bg-elevated)', border: '1px solid var(--border)',
+                borderRadius: 'var(--radius-sm)', cursor: 'pointer', transition: 'border-color 0.2s',
+              }}
+                onClick={() => document.getElementById('contact-file')?.click()}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" strokeWidth="1.5" strokeLinecap="round">
+                  <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" />
+                </svg>
+                <span style={{ fontSize: 14, color: file ? 'var(--text)' : 'var(--text-muted)' }}>
+                  {file ? file.name : t('contact.form.fileHint')}
+                </span>
+                {file && (
+                  <button type="button" onClick={e => { e.stopPropagation(); setFile(null) }}
+                    style={{
+                      marginLeft: 'auto', background: 'none', border: 'none', cursor: 'pointer',
+                      color: 'var(--text-muted)', padding: 4, display: 'flex',
+                    }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                  </button>
+                )}
+              </div>
+              <input
+                id="contact-file"
+                type="file"
+                accept=".pdf,.doc,.docx,.txt,.png,.jpg"
+                style={{ display: 'none' }}
+                onChange={e => setFile(e.target.files?.[0] || null)}
               />
             </div>
 

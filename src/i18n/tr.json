@@ -154,6 +154,8 @@
   "contact.form.sending": "Gönderiliyor...",
   "contact.form.success": "Mesajınız başarıyla gönderildi. En kısa sürede dönüş yapacağım.",
   "contact.form.error": "Mesaj gönderilemedi. Lütfen e-posta ile ulaşın.",
+  "contact.form.file": "Dosya Eki (opsiyonel)",
+  "contact.form.fileHint": "PDF, DOC veya görsel ekleyin",
 
   "blog.search": "Makale ara...",
   "blog.filter.all": "Tümü",
