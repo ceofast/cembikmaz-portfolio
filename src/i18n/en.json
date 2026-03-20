@@ -61,6 +61,8 @@
   "experience.linkedinTitle": "Full career history",
   "experience.linkedinDesc": "available on my LinkedIn profile.",
   "experience.linkedinBtn": "LinkedIn Profile",
+  "experience.techTitle": "Tech Stack",
+  "experience.techDesc": "Tools and technologies I actively use in my projects.",
 
   "projects.label": "Projects",
   "projects.title": "Selected works.",

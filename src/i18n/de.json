@@ -61,6 +61,8 @@
   "experience.linkedinTitle": "Vollständiger Werdegang",
   "experience.linkedinDesc": "auf meinem LinkedIn-Profil verfügbar.",
   "experience.linkedinBtn": "LinkedIn-Profil",
+  "experience.techTitle": "Technologie-Stack",
+  "experience.techDesc": "Werkzeuge und Technologien, die ich aktiv in meinen Projekten einsetze.",
 
   "projects.label": "Projekte",
   "projects.title": "Ausgewählte Arbeiten.",

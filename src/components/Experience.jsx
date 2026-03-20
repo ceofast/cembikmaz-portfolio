@@ -1,6 +1,25 @@
 import { useTranslation } from '../i18n/LanguageContext'
 import useInView from '../hooks/useInView'
 
+const techStack = [
+  { name: 'Python', color: '#3776ab' },
+  { name: 'PyTorch', color: '#ee4c2c' },
+  { name: 'TensorFlow', color: '#ff6f00' },
+  { name: 'Scikit-learn', color: '#f7931e' },
+  { name: 'LangChain', color: '#1c3c3c' },
+  { name: 'FastAPI', color: '#009688' },
+  { name: 'Docker', color: '#2496ed' },
+  { name: 'PostgreSQL', color: '#4169e1' },
+  { name: 'Pandas', color: '#150458' },
+  { name: 'OpenCV', color: '#5c3ee8' },
+  { name: 'Hugging Face', color: '#ffd21e' },
+  { name: 'Apache Spark', color: '#e25a1c' },
+  { name: 'MLflow', color: '#0194e2' },
+  { name: 'Git', color: '#f05032' },
+  { name: 'AWS', color: '#ff9900' },
+  { name: 'Linux', color: '#333' },
+]
+
 export default function Experience() {
   const { t } = useTranslation()
   const [ref, inView] = useInView()
@@ -13,9 +32,10 @@ export default function Experience() {
         <p className="section-desc">{t('experience.desc')}</p>
       </div>
 
+      {/* LinkedIn CTA */}
       <div className="card" style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        flexWrap: 'wrap', gap: 20,
+        flexWrap: 'wrap', gap: 20, marginBottom: 24,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <div style={{
@@ -48,6 +68,53 @@ export default function Experience() {
             <path d="M7 17L17 7M17 7H7M17 7v10" />
           </svg>
         </a>
+      </div>
+
+      {/* Tech Stack */}
+      <div className="card" style={{ padding: '28px 30px' }}>
+        <div style={{ marginBottom: 20 }}>
+          <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>
+            {t('experience.techTitle')}
+          </div>
+          <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>
+            {t('experience.techDesc')}
+          </div>
+        </div>
+        <div style={{
+          display: 'flex', flexWrap: 'wrap', gap: 8,
+        }}>
+          {techStack.map((tech, i) => (
+            <span
+              key={tech.name}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+                padding: '6px 14px', borderRadius: 980,
+                background: 'var(--bg-soft)',
+                border: '1px solid var(--border)',
+                fontSize: 13, fontWeight: 500, color: 'var(--text-secondary)',
+                transition: 'all 0.2s ease',
+                animation: inView ? `fadeInUp 0.4s ease ${i * 0.03}s both` : 'none',
+                cursor: 'default',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = tech.color
+                e.currentTarget.style.color = tech.color
+                e.currentTarget.style.background = `${tech.color}08`
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = 'var(--border)'
+                e.currentTarget.style.color = 'var(--text-secondary)'
+                e.currentTarget.style.background = 'var(--bg-soft)'
+              }}
+            >
+              <span style={{
+                width: 6, height: 6, borderRadius: '50%',
+                background: tech.color, flexShrink: 0,
+              }} />
+              {tech.name}
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   )

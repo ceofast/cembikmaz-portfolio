@@ -38,7 +38,7 @@ export default function Hero() {
   return (
     <section className="hero-section" aria-label="Hero" style={{
       minHeight: '100vh', display: 'flex', alignItems: 'center',
-      padding: '160px 32px 120px', position: 'relative', overflow: 'hidden',
+      padding: '140px 32px 100px', position: 'relative', overflow: 'hidden',
     }}>
       {/* Subtle mesh gradient background */}
       <div style={{
@@ -128,7 +128,7 @@ export default function Hero() {
         {/* Stats */}
         <div ref={statsRef} className="hero-stats" style={{
           display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
-          marginTop: 100,
+          marginTop: 72,
           background: 'var(--bg-soft)',
           borderRadius: 'var(--radius)',
           border: '1px solid var(--border)',
@@ -150,12 +150,12 @@ export default function Hero() {
       <style>{`
         @media (max-width: 768px) {
           .hero-section {
-            padding: 120px 24px 80px !important;
+            padding: 110px 24px 64px !important;
             min-height: auto !important;
           }
           .hero-stats {
             grid-template-columns: repeat(2, 1fr) !important;
-            margin-top: 64px !important;
+            margin-top: 48px !important;
           }
           .hero-stats > div:nth-child(2) { border-right: none !important; }
           .hero-stats > div:nth-child(1),

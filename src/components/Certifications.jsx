@@ -67,7 +67,7 @@ export default function Certifications() {
       {/* Total badge */}
       <div style={{
         display: 'inline-flex', alignItems: 'center', gap: 8,
-        padding: '6px 16px', borderRadius: 980, marginBottom: 28,
+        padding: '6px 16px', borderRadius: 980, marginBottom: 20,
         background: 'var(--bg-card)',
       }}>
         <span style={{
