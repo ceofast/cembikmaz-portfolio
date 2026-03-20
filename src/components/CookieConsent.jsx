@@ -32,18 +32,18 @@ export default function CookieConsent() {
     <div className="cookie-wrapper" style={{
       position: 'fixed', bottom: 24, left: 24, right: 24,
       zIndex: 9999, display: 'flex', justifyContent: 'center',
-      animation: 'fadeInUp 0.5s ease-out',
+      animation: 'fadeInUp 0.4s ease-out',
       pointerEvents: 'none',
     }}>
       <div style={{
-        maxWidth: 580, width: '100%',
-        background: 'rgba(17,17,19,0.95)', backdropFilter: 'blur(20px)',
+        maxWidth: 520, width: '100%',
+        background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(20px)',
         border: '1px solid var(--border)', borderRadius: 'var(--radius)',
         padding: '20px 24px', pointerEvents: 'auto',
-        boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+        boxShadow: '0 8px 40px rgba(0,0,0,0.08)',
       }}>
         <div style={{
-          fontSize: 14, fontWeight: 600, color: 'var(--text)', marginBottom: 8,
+          fontSize: 15, fontWeight: 600, color: 'var(--text)', marginBottom: 6,
         }}>
           {t('cookie.title')}
         </div>

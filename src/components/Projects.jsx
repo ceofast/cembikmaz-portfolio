@@ -3,6 +3,7 @@ import useInView from '../hooks/useInView'
 
 export default function Projects() {
   const { t } = useTranslation()
+  const [ref, inView] = useInView()
 
   const projects = [
     {
@@ -49,8 +50,6 @@ export default function Projects() {
     },
   ]
 
-  const [ref, inView] = useInView()
-
   return (
     <section id="projects" className="section" ref={ref} style={{ opacity: inView ? 1 : 0, transform: inView ? 'none' : 'translateY(20px)', transition: 'opacity 0.8s ease, transform 0.8s ease' }}>
       <div>
@@ -60,7 +59,7 @@ export default function Projects() {
       </div>
 
       <div className="projects-grid" style={{
-        display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(310px, 1fr))', gap: 16,
+        display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16,
       }}>
         {projects.map((project, i) => (
           <a
@@ -76,27 +75,27 @@ export default function Projects() {
           >
             <div style={{
               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              marginBottom: 18,
+              marginBottom: 16,
             }}>
               <span style={{
-                padding: '4px 12px', borderRadius: 6, fontSize: 10, fontWeight: 600,
-                background: 'var(--accent-dim)', color: 'var(--accent-light)',
-                fontFamily: 'var(--font-mono)', letterSpacing: 0.8, textTransform: 'uppercase',
+                padding: '4px 10px', borderRadius: 6, fontSize: 11, fontWeight: 500,
+                background: 'rgba(0,113,227,0.06)', color: 'var(--accent)',
+                letterSpacing: 0.3,
               }}>{project.category}</span>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-                stroke="var(--text-muted)" strokeWidth="1.8" strokeLinecap="round"
-                style={{ opacity: 0.5 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                stroke="var(--text-muted)" strokeWidth="1.5" strokeLinecap="round"
+                style={{ opacity: 0.4 }}>
                 <path d="M7 17L17 7M17 7H7M17 7v10" />
               </svg>
             </div>
 
             <h3 style={{
-              fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 10,
+              fontSize: 16, fontWeight: 600, color: 'var(--text)', marginBottom: 8,
               lineHeight: 1.3,
             }}>{project.title}</h3>
 
             <p style={{
-              fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.75,
+              fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.6,
               flex: 1, marginBottom: 20,
             }}>{project.desc}</p>
 
@@ -106,9 +105,8 @@ export default function Projects() {
             }}>
               {project.tags.map(tag => (
                 <span key={tag} style={{
-                  padding: '3px 10px', borderRadius: 6, fontSize: 11, fontWeight: 500,
-                  background: 'var(--bg)', border: '1px solid var(--border)',
-                  color: 'var(--text-muted)', fontFamily: 'var(--font-mono)',
+                  padding: '3px 10px', borderRadius: 6, fontSize: 12, fontWeight: 500,
+                  background: 'var(--bg)', color: 'var(--text-muted)',
                 }}>{tag}</span>
               ))}
             </div>

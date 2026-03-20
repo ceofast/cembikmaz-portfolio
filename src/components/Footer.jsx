@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer role="contentinfo" style={{
       borderTop: '1px solid var(--border)',
-      padding: '36px 32px',
+      padding: '32px 32px',
     }}>
       <div style={{
         maxWidth: 'var(--max-width)', margin: '0 auto',
@@ -15,16 +15,16 @@ export default function Footer() {
         flexWrap: 'wrap', gap: 16,
       }}>
         <div style={{
-          fontSize: 12, color: 'var(--text-muted)', fontWeight: 400,
+          fontSize: 13, color: 'var(--text-muted)', fontWeight: 400,
         }}>
           &copy; {new Date().getFullYear()} Cem B&#305;kmaz
         </div>
 
-        <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
           <Link to="/kvkk" style={{
-            fontSize: 12, color: 'var(--text-muted)', transition: 'color 0.25s',
+            fontSize: 13, color: 'var(--text-muted)', transition: 'color 0.2s',
           }}
-            onMouseEnter={e => e.target.style.color = 'var(--text-secondary)'}
+            onMouseEnter={e => e.target.style.color = 'var(--text)'}
             onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}
           >
             {t('footer.privacy')}
@@ -36,8 +36,8 @@ export default function Footer() {
           ].map((s, i) => (
             <a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
               aria-label={s.href.includes('linkedin') ? 'LinkedIn' : s.href.includes('github') ? 'GitHub' : 'Medium'}
-              style={{ color: 'var(--text-muted)', transition: 'color 0.25s', display: 'flex' }}
-              onMouseEnter={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+              style={{ color: 'var(--text-muted)', transition: 'color 0.2s', display: 'flex' }}
+              onMouseEnter={e => e.currentTarget.style.color = 'var(--text)'}
               onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d={s.d} /></svg>
@@ -47,7 +47,7 @@ export default function Footer() {
       </div>
       <style>{`
         @media (max-width: 768px) {
-          footer { padding: 28px 20px !important; }
+          footer { padding: 24px 24px !important; }
         }
       `}</style>
     </footer>

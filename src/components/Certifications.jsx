@@ -44,9 +44,9 @@ const certData = [
 const TOTAL_CERTS = 37
 
 const orgColors = {
-  'Hugging Face': '#FFD21E',
+  'Hugging Face': '#ff9d00',
   'Miuul': '#6366f1',
-  'DataCamp': '#03EF62',
+  'DataCamp': '#05c168',
   'Veri Bilimi Okulu': '#f97316',
   'Global AI Hub': '#3b82f6',
 }
@@ -54,7 +54,6 @@ const orgColors = {
 export default function Certifications() {
   const { t } = useTranslation()
   const [expanded, setExpanded] = useState(null)
-
   const [ref, inView] = useInView()
 
   return (
@@ -67,17 +66,15 @@ export default function Certifications() {
 
       {/* Total badge */}
       <div style={{
-        display: 'inline-flex', alignItems: 'center', gap: 10,
-        padding: '8px 18px', borderRadius: 100, marginBottom: 28,
-        background: 'var(--accent-dim)', border: '1px solid var(--accent-mid)',
+        display: 'inline-flex', alignItems: 'center', gap: 8,
+        padding: '6px 16px', borderRadius: 980, marginBottom: 28,
+        background: 'var(--bg-card)',
       }}>
         <span style={{
-          fontSize: 22, fontWeight: 800, color: 'var(--accent)',
-          fontFamily: 'var(--font-mono)',
+          fontSize: 20, fontWeight: 700, color: 'var(--text)',
         }}>{TOTAL_CERTS}+</span>
         <span style={{
-          fontSize: 12, fontWeight: 500, color: 'var(--accent-light)',
-          fontFamily: 'var(--font-mono)', letterSpacing: 0.5,
+          fontSize: 13, fontWeight: 500, color: 'var(--text-muted)',
         }}>{t('certs.total')}</span>
       </div>
 
@@ -94,17 +91,15 @@ export default function Certifications() {
               onClick={() => setExpanded(expanded === gi ? null : gi)}
             >
               <div style={{
-                fontSize: 10, fontWeight: 600, color: 'var(--text-muted)',
-                letterSpacing: 1.5, textTransform: 'uppercase',
-                fontFamily: 'var(--font-mono)',
+                fontSize: 13, fontWeight: 600, color: 'var(--text-muted)',
+                letterSpacing: 0,
               }}>{t(group.catKey)}</div>
               <div style={{
                 display: 'flex', alignItems: 'center', gap: 8,
               }}>
                 <span style={{
-                  padding: '2px 10px', borderRadius: 6, fontSize: 11, fontWeight: 600,
-                  background: 'var(--bg)', border: '1px solid var(--border)',
-                  color: 'var(--accent-light)', fontFamily: 'var(--font-mono)',
+                  padding: '2px 8px', borderRadius: 6, fontSize: 12, fontWeight: 600,
+                  background: 'var(--bg)', color: 'var(--text-muted)',
                 }}>{group.certs.length}</span>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" strokeWidth="2"
                   style={{
@@ -116,12 +111,12 @@ export default function Certifications() {
               </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {(expanded === gi ? group.certs : group.certs.slice(0, 2)).map((cert, ci) => (
                 <div key={ci} style={{
                   display: 'flex', alignItems: 'flex-start', gap: 12,
                   padding: '10px 14px', background: 'var(--bg)',
-                  borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)',
+                  borderRadius: 'var(--radius-sm)',
                 }}>
                   <div style={{
                     width: 6, height: 6, borderRadius: '50%', marginTop: 6, flexShrink: 0,
@@ -129,19 +124,19 @@ export default function Certifications() {
                   }} />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{
-                      fontSize: 13, fontWeight: 600, color: 'var(--text)',
-                      lineHeight: 1.4, marginBottom: 3,
+                      fontSize: 14, fontWeight: 500, color: 'var(--text)',
+                      lineHeight: 1.4, marginBottom: 2,
                     }}>{cert.name}</div>
                     <div style={{
                       display: 'flex', alignItems: 'center', gap: 8,
-                      fontSize: 11, color: 'var(--text-muted)',
+                      fontSize: 12, color: 'var(--text-muted)',
                     }}>
                       <span>{cert.org}</span>
                       <span style={{
                         width: 3, height: 3, borderRadius: '50%',
                         background: 'var(--border-hover)',
                       }} />
-                      <span style={{ fontFamily: 'var(--font-mono)' }}>{cert.year}</span>
+                      <span>{cert.year}</span>
                     </div>
                   </div>
                 </div>
@@ -151,9 +146,8 @@ export default function Certifications() {
                   onClick={() => setExpanded(gi)}
                   style={{
                     background: 'none', border: 'none', cursor: 'pointer',
-                    fontSize: 11, color: 'var(--accent-light)', fontWeight: 500,
-                    fontFamily: 'var(--font-mono)', padding: '4px 0',
-                    textAlign: 'left',
+                    fontSize: 12, color: 'var(--accent)', fontWeight: 500,
+                    padding: '4px 0', textAlign: 'left',
                   }}
                 >
                   +{group.certs.length - 2} more
@@ -173,7 +167,7 @@ export default function Certifications() {
           className="btn btn-outline"
         >
           {t('certs.allBtn')}
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
             <path d="M7 17L17 7M17 7H7M17 7v10" />
           </svg>
         </a>

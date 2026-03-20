@@ -3,6 +3,7 @@ import useInView from '../hooks/useInView'
 
 export default function Consulting() {
   const { t } = useTranslation()
+  const [ref, inView] = useInView()
 
   const services = [
     {
@@ -25,8 +26,6 @@ export default function Consulting() {
     },
   ]
 
-  const [ref, inView] = useInView()
-
   return (
     <section id="consulting" className="section" ref={ref} style={{ opacity: inView ? 1 : 0, transform: inView ? 'none' : 'translateY(20px)', transition: 'opacity 0.8s ease, transform 0.8s ease' }}>
       <div>
@@ -41,15 +40,15 @@ export default function Consulting() {
         {services.map((service, i) => (
           <div key={i} className="card" style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{
-              fontSize: 32, fontWeight: 800, color: 'var(--border-hover)',
-              fontFamily: 'var(--font-mono)', marginBottom: 20, lineHeight: 1,
+              fontSize: 28, fontWeight: 700, color: 'rgba(0,0,0,0.08)',
+              marginBottom: 20, lineHeight: 1,
             }}>{service.num}</div>
 
             <h3 style={{
-              fontSize: 16, fontWeight: 700, color: 'var(--text)', marginBottom: 8,
+              fontSize: 17, fontWeight: 600, color: 'var(--text)', marginBottom: 8,
             }}>{service.title}</h3>
             <p style={{
-              fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: 24,
+              fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 24,
             }}>{service.desc}</p>
 
             <div style={{
@@ -63,7 +62,7 @@ export default function Consulting() {
                 }}>
                   <span style={{
                     width: 4, height: 4, borderRadius: '50%',
-                    background: 'var(--accent)', flexShrink: 0, opacity: 0.7,
+                    background: 'var(--accent)', flexShrink: 0, opacity: 0.6,
                   }} />
                   {item}
                 </div>
@@ -77,23 +76,22 @@ export default function Consulting() {
       <div className="consulting-cta" style={{
         marginTop: 24, textAlign: 'center', padding: '48px 32px',
         background: 'var(--bg-card)',
-        border: '1px solid var(--accent-mid)',
         borderRadius: 'var(--radius)',
       }}>
         <h3 style={{
-          fontSize: 20, fontWeight: 700, color: 'var(--text)', marginBottom: 10,
+          fontSize: 22, fontWeight: 600, color: 'var(--text)', marginBottom: 10,
         }}>
           {t('consulting.ctaTitle')}
         </h3>
         <p style={{
-          fontSize: 14, color: 'var(--text-secondary)', marginBottom: 28,
-          maxWidth: 460, margin: '0 auto 28px', lineHeight: 1.7,
+          fontSize: 15, color: 'var(--text-secondary)', marginBottom: 28,
+          maxWidth: 460, margin: '0 auto 28px', lineHeight: 1.6,
         }}>
           {t('consulting.ctaDesc')}
         </p>
         <a href={`mailto:cembikmaz@outlook.com?subject=${t('consulting.emailSubject')}`} className="btn btn-primary">
           {t('consulting.ctaBtn')}
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </a>

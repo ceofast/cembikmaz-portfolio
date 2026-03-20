@@ -7,40 +7,25 @@ export default function Hero() {
   return (
     <section className="hero-section" aria-label="Hero" style={{
       minHeight: '100vh', display: 'flex', alignItems: 'center',
-      padding: '140px 32px 100px', position: 'relative', overflow: 'hidden',
+      padding: '160px 32px 120px', position: 'relative',
     }}>
-      {/* Ambient light */}
-      <div style={{
-        position: 'absolute', top: '-20%', right: '-10%',
-        width: 700, height: 700, borderRadius: '50%',
-        background: 'radial-gradient(circle, var(--accent-glow) 0%, transparent 65%)',
-        filter: 'blur(100px)', pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'absolute', bottom: '-30%', left: '-15%',
-        width: 600, height: 600, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(30,30,50,0.15) 0%, transparent 65%)',
-        filter: 'blur(80px)', pointerEvents: 'none',
-      }} />
-
       <div style={{
         maxWidth: 'var(--max-width)', margin: '0 auto', width: '100%',
-        position: 'relative', zIndex: 1,
       }}>
-        <div style={{ animation: 'fadeInUp 0.9s cubic-bezier(0.25,0.1,0.25,1)' }}>
+        <div style={{ animation: 'fadeInUp 0.8s cubic-bezier(0.25,0.1,0.25,1)' }}>
           {/* Status pill */}
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
-            padding: '7px 18px', borderRadius: 100, marginBottom: 36,
-            background: 'var(--accent-dim)', border: '1px solid var(--accent-mid)',
+            padding: '6px 14px', borderRadius: 980, marginBottom: 32,
+            background: 'rgba(52,199,89,0.08)',
           }}>
             <span style={{
-              width: 6, height: 6, borderRadius: '50%', background: '#34d399',
+              width: 6, height: 6, borderRadius: '50%', background: '#34c759',
               animation: 'pulse-dot 2.5s ease-in-out infinite',
             }} />
             <span style={{
-              fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 500,
-              color: 'var(--accent-light)', letterSpacing: 0.5,
+              fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 500,
+              color: '#248a3d', letterSpacing: 0,
             }}>
               {t('hero.badge')}
             </span>
@@ -48,8 +33,8 @@ export default function Hero() {
 
           {/* Name */}
           <h1 style={{
-            fontSize: 'clamp(44px, 6.5vw, 68px)', fontWeight: 800,
-            lineHeight: 1.08, letterSpacing: -2.5, marginBottom: 28,
+            fontSize: 'clamp(48px, 7vw, 80px)', fontWeight: 700,
+            lineHeight: 1.05, letterSpacing: -3, marginBottom: 24,
             color: 'var(--text)',
           }}>
             Cem B&#305;kmaz
@@ -57,31 +42,31 @@ export default function Hero() {
 
           {/* Title */}
           <p style={{
-            fontSize: 'clamp(17px, 2.2vw, 20px)', fontWeight: 400,
-            color: 'var(--text-secondary)', lineHeight: 1.5,
-            maxWidth: 540, marginBottom: 20,
+            fontSize: 'clamp(20px, 2.5vw, 24px)', fontWeight: 400,
+            color: 'var(--text-secondary)', lineHeight: 1.4,
+            maxWidth: 500, marginBottom: 16,
           }}>
-            <span style={{ color: 'var(--accent-light)', fontWeight: 600 }}>{t('hero.title')}</span>{' '}
-            {t('hero.titleAnd')}{' '}<span style={{ color: 'var(--accent-light)', fontWeight: 600 }}>{t('hero.title2')}</span>
+            <span style={{ fontWeight: 600, color: 'var(--text)' }}>{t('hero.title')}</span>{' '}
+            {t('hero.titleAnd')}{' '}<span style={{ fontWeight: 600, color: 'var(--text)' }}>{t('hero.title2')}</span>
           </p>
 
           {/* Description */}
           <p style={{
-            fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.8,
-            maxWidth: 500, marginBottom: 44,
+            fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.6,
+            maxWidth: 480, marginBottom: 40,
           }}>
             {t('hero.desc')}
           </p>
 
           {/* CTA */}
-          <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <a href="#contact" className="btn btn-primary"
               onClick={e => {
                 e.preventDefault()
                 document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
               }}>
               {t('hero.cta')}
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
@@ -94,10 +79,8 @@ export default function Hero() {
         {/* Stats */}
         <div className="hero-stats" style={{
           display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: 1, marginTop: 96,
-          background: 'var(--border)', borderRadius: 'var(--radius)',
-          overflow: 'hidden',
-          animation: 'fadeInUp 0.9s cubic-bezier(0.25,0.1,0.25,1) 0.2s both',
+          gap: 20, marginTop: 100,
+          animation: 'fadeInUp 0.8s cubic-bezier(0.25,0.1,0.25,1) 0.15s both',
         }}>
           {[
             { value: '3+', label: t('hero.stat1') },
@@ -105,16 +88,14 @@ export default function Hero() {
             { value: '5+', label: t('hero.stat3') },
             { value: '335', label: t('hero.stat4') },
           ].map((stat, i) => (
-            <div key={i} style={{
-              background: 'var(--bg-card)', padding: '28px 20px', textAlign: 'center',
-            }}>
+            <div key={i} style={{ textAlign: 'center' }}>
               <div style={{
-                fontSize: 26, fontWeight: 700, color: 'var(--accent)',
-                fontFamily: 'var(--font-mono)', letterSpacing: -0.5,
+                fontSize: 32, fontWeight: 700, color: 'var(--text)',
+                letterSpacing: -1,
               }}>{stat.value}</div>
               <div style={{
-                fontSize: 11, color: 'var(--text-muted)', marginTop: 6,
-                fontWeight: 500, letterSpacing: 0.8, textTransform: 'uppercase',
+                fontSize: 12, color: 'var(--text-muted)', marginTop: 4,
+                fontWeight: 500,
               }}>{stat.label}</div>
             </div>
           ))}
@@ -124,12 +105,13 @@ export default function Hero() {
       <style>{`
         @media (max-width: 768px) {
           .hero-section {
-            padding: 100px 20px 64px !important;
+            padding: 120px 24px 80px !important;
             min-height: auto !important;
           }
           .hero-stats {
             grid-template-columns: repeat(2, 1fr) !important;
-            margin-top: 56px !important;
+            margin-top: 64px !important;
+            gap: 32px 16px !important;
           }
         }
       `}</style>

@@ -38,26 +38,26 @@ export default function Navbar() {
   return (
     <nav role="navigation" aria-label="Main navigation" style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-      padding: scrolled ? '14px 32px' : '22px 32px',
-      background: scrolled ? 'rgba(9,9,11,0.92)' : 'transparent',
-      backdropFilter: scrolled ? 'blur(24px) saturate(1.4)' : 'none',
-      WebkitBackdropFilter: scrolled ? 'blur(24px) saturate(1.4)' : 'none',
+      padding: scrolled ? '12px 32px' : '20px 32px',
+      background: scrolled ? 'rgba(255,255,255,0.85)' : 'transparent',
+      backdropFilter: scrolled ? 'blur(20px) saturate(1.8)' : 'none',
+      WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(1.8)' : 'none',
       borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
-      transition: 'all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1)',
+      transition: 'all 0.3s ease',
     }}>
       <div style={{
         maxWidth: 'var(--max-width)', margin: '0 auto',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <Link to="/" style={{
-          fontFamily: 'var(--font-sans)', fontSize: 15, fontWeight: 700,
-          color: 'var(--text)', letterSpacing: -0.3, display: 'flex', alignItems: 'center', gap: 3,
+          fontSize: 15, fontWeight: 600,
+          color: 'var(--text)', letterSpacing: -0.3,
         }}>
-          Cem<span style={{ color: 'var(--accent)' }}> BIKMAZ</span>
+          Cem Bıkmaz
         </Link>
 
         <div style={{
-          display: 'flex', alignItems: 'center', gap: 36,
+          display: 'flex', alignItems: 'center', gap: 32,
         }} className="desktop-nav">
           {navKeys.map(link => (
             <Link
@@ -65,8 +65,8 @@ export default function Navbar() {
               to={link.href.startsWith('/#') ? '/' : link.href}
               onClick={(e) => handleNavClick(e, link.href)}
               style={{
-                fontSize: 13, fontWeight: 450, color: 'var(--text-muted)',
-                transition: 'color 0.25s', letterSpacing: 0.1,
+                fontSize: 13, fontWeight: 400, color: 'var(--text-muted)',
+                transition: 'color 0.2s',
               }}
               onMouseEnter={e => e.target.style.color = 'var(--text)'}
               onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}
@@ -102,8 +102,8 @@ export default function Navbar() {
       {menuOpen && (
         <div style={{
           position: 'absolute', top: '100%', left: 0, right: 0,
-          background: 'rgba(9,9,11,0.98)', backdropFilter: 'blur(24px)',
-          borderBottom: '1px solid var(--border)', padding: '12px 32px 20px',
+          background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(20px)',
+          borderBottom: '1px solid var(--border)', padding: '8px 32px 16px',
         }}>
           {navKeys.map(link => (
             <Link
@@ -111,7 +111,7 @@ export default function Navbar() {
               to={link.href.startsWith('/#') ? '/' : link.href}
               onClick={(e) => handleNavClick(e, link.href)}
               style={{
-                display: 'block', padding: '14px 0', fontSize: 14, fontWeight: 500,
+                display: 'block', padding: '14px 0', fontSize: 15, fontWeight: 500,
                 color: 'var(--text-secondary)', borderBottom: '1px solid var(--border)',
               }}
             >
@@ -127,7 +127,7 @@ export default function Navbar() {
           .desktop-nav { display: none !important; }
           .mobile-controls { display: flex !important; }
           .mobile-menu-btn { display: block !important; }
-          nav { padding-left: 20px !important; padding-right: 20px !important; }
+          nav { padding-left: 24px !important; padding-right: 24px !important; }
         }
       `}</style>
     </nav>
