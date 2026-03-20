@@ -59,73 +59,102 @@ export default function Hero() {
         maxWidth: 'var(--max-width)', margin: '0 auto', width: '100%',
         position: 'relative', zIndex: 1,
       }}>
-        <div style={{ animation: 'fadeInUp 0.8s cubic-bezier(0.25,0.1,0.25,1)' }}>
-          {/* Status pill */}
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: 8,
-            padding: '6px 14px', borderRadius: 980, marginBottom: 32,
-            background: 'rgba(52,199,89,0.08)', border: '1px solid rgba(52,199,89,0.12)',
-          }}>
-            <span style={{
-              width: 6, height: 6, borderRadius: '50%', background: '#34c759',
-              animation: 'pulse-dot 2.5s ease-in-out infinite',
-            }} />
-            <span style={{
-              fontSize: 12, fontWeight: 500,
-              color: '#248a3d',
+        {/* Hero content: text + photo */}
+        <div className="hero-content" style={{
+          display: 'grid', gridTemplateColumns: '1fr auto', gap: 48,
+          alignItems: 'center',
+        }}>
+          <div style={{ animation: 'fadeInUp 0.8s cubic-bezier(0.25,0.1,0.25,1)' }}>
+            {/* Status pill */}
+            <div style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              padding: '6px 14px', borderRadius: 980, marginBottom: 32,
+              background: 'rgba(52,199,89,0.08)', border: '1px solid rgba(52,199,89,0.12)',
             }}>
-              {t('hero.badge')}
-            </span>
+              <span style={{
+                width: 6, height: 6, borderRadius: '50%', background: '#34c759',
+                animation: 'pulse-dot 2.5s ease-in-out infinite',
+              }} />
+              <span style={{
+                fontSize: 12, fontWeight: 500,
+                color: '#248a3d',
+              }}>
+                {t('hero.badge')}
+              </span>
+            </div>
+
+            {/* Name — gradient text */}
+            <h1 aria-label="Cem Bıkmaz" style={{
+              fontSize: 'clamp(44px, 7vw, 76px)', fontWeight: 700,
+              lineHeight: 1.02, letterSpacing: -3.5, marginBottom: 24,
+              background: 'linear-gradient(135deg, var(--hero-grad-start) 0%, var(--hero-grad-start) 50%, var(--hero-grad-end) 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              Cem B&#305;kmaz
+            </h1>
+
+            {/* Title */}
+            <p style={{
+              fontSize: 'clamp(20px, 2.5vw, 26px)', fontWeight: 400,
+              color: 'var(--text-secondary)', lineHeight: 1.35,
+              maxWidth: 520, marginBottom: 16,
+            }}>
+              <RotatingText
+                words={['Data Scientist', 'ML Engineer', 'AI Consultant']}
+                interval={3000}
+                style={{ fontWeight: 600, color: 'var(--text)' }}
+              />
+            </p>
+
+            {/* Description */}
+            <p style={{
+              fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65,
+              maxWidth: 480, marginBottom: 40,
+            }}>
+              {t('hero.desc')}
+            </p>
+
+            {/* CTA */}
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <a href="#contact" className="btn btn-primary"
+                onClick={e => {
+                  e.preventDefault()
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                }}>
+                {t('hero.cta')}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+              <Link to="/blog" className="btn btn-outline">
+                {t('hero.articles')}
+              </Link>
+            </div>
           </div>
 
-          {/* Name — gradient text */}
-          <h1 aria-label="Cem Bıkmaz" style={{
-            fontSize: 'clamp(52px, 8vw, 88px)', fontWeight: 700,
-            lineHeight: 1.02, letterSpacing: -4, marginBottom: 28,
-            background: 'linear-gradient(135deg, var(--hero-grad-start) 0%, var(--hero-grad-start) 50%, var(--hero-grad-end) 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+          {/* Profile photo */}
+          <div className="hero-photo" style={{
+            animation: 'fadeIn 1s cubic-bezier(0.25,0.1,0.25,1) 0.3s both',
           }}>
-            Cem B&#305;kmaz
-          </h1>
-
-          {/* Title */}
-          <p style={{
-            fontSize: 'clamp(20px, 2.5vw, 26px)', fontWeight: 400,
-            color: 'var(--text-secondary)', lineHeight: 1.35,
-            maxWidth: 520, marginBottom: 16,
-          }}>
-            <RotatingText
-              words={['Data Scientist', 'ML Engineer', 'AI Consultant']}
-              interval={3000}
-              style={{ fontWeight: 600, color: 'var(--text)' }}
-            />
-          </p>
-
-          {/* Description */}
-          <p style={{
-            fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65,
-            maxWidth: 500, marginBottom: 44,
-          }}>
-            {t('hero.desc')}
-          </p>
-
-          {/* CTA */}
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-            <a href="#contact" className="btn btn-primary"
-              onClick={e => {
-                e.preventDefault()
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-              }}>
-              {t('hero.cta')}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </a>
-            <Link to="/blog" className="btn btn-outline">
-              {t('hero.articles')}
-            </Link>
+            <div style={{
+              width: 280, height: 340,
+              borderRadius: 24,
+              overflow: 'hidden',
+              border: '1px solid var(--border)',
+              boxShadow: '0 20px 60px var(--shadow-lg)',
+              position: 'relative',
+            }}>
+              <img
+                src="/profile.jpg"
+                alt="Cem Bıkmaz"
+                style={{
+                  width: '100%', height: '100%',
+                  objectFit: 'cover', objectPosition: 'center top',
+                }}
+              />
+            </div>
           </div>
         </div>
 
@@ -156,6 +185,19 @@ export default function Hero() {
           .hero-section {
             padding: 110px 24px 64px !important;
             min-height: auto !important;
+          }
+          .hero-content {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+          }
+          .hero-photo {
+            order: -1;
+            justify-self: start;
+          }
+          .hero-photo > div {
+            width: 140px !important;
+            height: 170px !important;
+            border-radius: 20px !important;
           }
           .hero-stats {
             grid-template-columns: repeat(2, 1fr) !important;

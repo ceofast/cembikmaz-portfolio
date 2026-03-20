@@ -134,16 +134,18 @@ export default function ArticleView() {
           )}
 
           <div style={{
-            display: 'flex', alignItems: 'center', gap: 10,
+            display: 'flex', alignItems: 'center', gap: 12,
             padding: '12px 16px', borderRadius: 'var(--radius-sm)',
             background: 'var(--bg-card)',
           }}>
-            <div style={{
-              width: 32, height: 32, borderRadius: 8,
-              background: 'var(--bg)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 13, fontWeight: 600, color: 'var(--text-muted)',
-            }}>CB</div>
+            <img
+              src="/profile.jpg"
+              alt="Cem Bıkmaz"
+              style={{
+                width: 36, height: 36, borderRadius: 10,
+                objectFit: 'cover', objectPosition: 'center top',
+              }}
+            />
             <div>
               <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--text)' }}>
                 {article.creator || 'Cem B\u0131kmaz'}
