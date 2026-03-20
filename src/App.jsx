@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect } from 'react'
 import { LanguageProvider, useTranslation } from './i18n/LanguageContext'
 import ErrorBoundary from './components/ErrorBoundary'
 import Navbar from './components/Navbar'
+import BackToTop from './components/BackToTop'
 import Home from './pages/Home'
 import CookieConsent from './components/CookieConsent'
 
@@ -64,6 +65,7 @@ function AppContent() {
           </Routes>
         </div>
       </Suspense>
+      <BackToTop />
       <CookieConsent />
     </>
   )

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { useTranslation } from '../i18n/LanguageContext'
 import Articles from '../components/Articles'
 import Footer from '../components/Footer'
@@ -6,13 +6,14 @@ import Footer from '../components/Footer'
 export default function Blog() {
   const { t } = useTranslation()
   const [search, setSearch] = useState('')
+  const [activeCategory, setActiveCategory] = useState(null)
 
   return (
     <main style={{ paddingTop: 80 }}>
       <div className="section" style={{ paddingBottom: 0 }}>
         {/* Search */}
         <div style={{
-          position: 'relative', maxWidth: 480, marginBottom: 40,
+          position: 'relative', maxWidth: 480, marginBottom: 20,
         }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
             stroke="var(--text-muted)" strokeWidth="2" strokeLinecap="round"
@@ -29,18 +30,18 @@ export default function Blog() {
             aria-label={t('blog.search')}
             style={{
               width: '100%', padding: '12px 16px 12px 44px',
-              background: 'var(--bg-card)', border: '1px solid var(--border)',
-              borderRadius: 'var(--radius-sm)', color: 'var(--text)',
-              fontSize: 14, fontFamily: 'var(--font-sans)',
-              outline: 'none', transition: 'border-color 0.2s',
+              background: 'var(--bg-card)', border: '1px solid transparent',
+              borderRadius: 980, color: 'var(--text)',
+              fontSize: 15, fontFamily: 'var(--font-sans)',
+              outline: 'none', transition: 'all 0.2s',
             }}
-            onFocus={e => e.target.style.borderColor = 'var(--accent-mid)'}
-            onBlur={e => e.target.style.borderColor = 'var(--border)'}
+            onFocus={e => e.target.style.borderColor = 'var(--border-hover)'}
+            onBlur={e => e.target.style.borderColor = 'transparent'}
           />
         </div>
       </div>
 
-      <Articles searchQuery={search} />
+      <Articles searchQuery={search} activeCategory={activeCategory} onCategoryChange={setActiveCategory} showCategoryFilter />
       <Footer />
     </main>
   )

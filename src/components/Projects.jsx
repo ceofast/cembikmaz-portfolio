@@ -71,6 +71,7 @@ export default function Projects() {
             style={{
               display: 'flex', flexDirection: 'column', textDecoration: 'none',
               cursor: 'pointer',
+              animation: inView ? `fadeInUp 0.5s ease ${i * 0.08}s both` : 'none',
             }}
           >
             <div style={{

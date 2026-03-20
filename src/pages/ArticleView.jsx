@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import DOMPurify from 'dompurify'
 import { formatDate } from '../components/Articles'
 import { useTranslation } from '../i18n/LanguageContext'
+import ReadingProgress from '../components/ReadingProgress'
 import Footer from '../components/Footer'
 
 export default function ArticleView() {
@@ -71,6 +72,7 @@ export default function ArticleView() {
 
   return (
     <main style={{ paddingTop: 100 }}>
+      <ReadingProgress />
       <article className="section" style={{ maxWidth: 720, paddingBottom: 60 }}>
         {/* Back link */}
         <Link to="/blog" style={{

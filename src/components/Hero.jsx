@@ -1,8 +1,39 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from '../i18n/LanguageContext'
+import useInView from '../hooks/useInView'
+import useCountUp from '../hooks/useCountUp'
+
+function AnimatedStat({ value, label, inView }) {
+  const numericPart = parseInt(value) || 0
+  const suffix = value.replace(/[0-9]/g, '')
+  const count = useCountUp(numericPart, 1800, inView)
+
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <div style={{
+        fontSize: 32, fontWeight: 700, color: 'var(--text)',
+        letterSpacing: -1,
+      }}>
+        {inView ? count : 0}{suffix}
+      </div>
+      <div style={{
+        fontSize: 12, color: 'var(--text-muted)', marginTop: 4,
+        fontWeight: 500,
+      }}>{label}</div>
+    </div>
+  )
+}
 
 export default function Hero() {
   const { t } = useTranslation()
+  const [statsRef, statsInView] = useInView()
+
+  const stats = [
+    { value: '3+', label: t('hero.stat1') },
+    { value: '63', label: t('hero.stat2') },
+    { value: '5+', label: t('hero.stat3') },
+    { value: '335', label: t('hero.stat4') },
+  ]
 
   return (
     <section className="hero-section" aria-label="Hero" style={{
@@ -25,7 +56,7 @@ export default function Hero() {
             }} />
             <span style={{
               fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 500,
-              color: '#248a3d', letterSpacing: 0,
+              color: '#248a3d',
             }}>
               {t('hero.badge')}
             </span>
@@ -77,27 +108,15 @@ export default function Hero() {
         </div>
 
         {/* Stats */}
-        <div className="hero-stats" style={{
+        <div ref={statsRef} className="hero-stats" style={{
           display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
           gap: 20, marginTop: 100,
-          animation: 'fadeInUp 0.8s cubic-bezier(0.25,0.1,0.25,1) 0.15s both',
+          opacity: statsInView ? 1 : 0,
+          transform: statsInView ? 'none' : 'translateY(16px)',
+          transition: 'opacity 0.6s ease, transform 0.6s ease',
         }}>
-          {[
-            { value: '3+', label: t('hero.stat1') },
-            { value: '63', label: t('hero.stat2') },
-            { value: '5+', label: t('hero.stat3') },
-            { value: '335', label: t('hero.stat4') },
-          ].map((stat, i) => (
-            <div key={i} style={{ textAlign: 'center' }}>
-              <div style={{
-                fontSize: 32, fontWeight: 700, color: 'var(--text)',
-                letterSpacing: -1,
-              }}>{stat.value}</div>
-              <div style={{
-                fontSize: 12, color: 'var(--text-muted)', marginTop: 4,
-                fontWeight: 500,
-              }}>{stat.label}</div>
-            </div>
+          {stats.map((stat, i) => (
+            <AnimatedStat key={i} value={stat.value} label={stat.label} inView={statsInView} />
           ))}
         </div>
       </div>

@@ -103,16 +103,18 @@ export default function Navbar() {
         <div style={{
           position: 'absolute', top: '100%', left: 0, right: 0,
           background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid var(--border)', padding: '8px 32px 16px',
+          borderBottom: '1px solid var(--border)', padding: '8px 24px 16px',
+          animation: 'slideDown 0.25s ease',
         }}>
-          {navKeys.map(link => (
+          {navKeys.map((link, i) => (
             <Link
               key={link.key}
               to={link.href.startsWith('/#') ? '/' : link.href}
               onClick={(e) => handleNavClick(e, link.href)}
               style={{
-                display: 'block', padding: '14px 0', fontSize: 15, fontWeight: 500,
+                display: 'block', padding: '14px 0', fontSize: 16, fontWeight: 500,
                 color: 'var(--text-secondary)', borderBottom: '1px solid var(--border)',
+                animation: `fadeInUp 0.3s ease ${i * 0.04}s both`,
               }}
             >
               {t(link.key)}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from '../i18n/LanguageContext'
 import useInView from '../hooks/useInView'
 
-export default function Articles({ limit, searchQuery = '' }) {
+export default function Articles({ limit, searchQuery = '', activeCategory = null, onCategoryChange, showCategoryFilter = false }) {
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(true)
   const { t, lang } = useTranslation()
@@ -16,13 +16,23 @@ export default function Articles({ limit, searchQuery = '' }) {
     })
   }, [])
 
-  const filtered = searchQuery
-    ? articles.filter(a =>
-        a.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        a.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        a.categories.some(c => c.toLowerCase().includes(searchQuery.toLowerCase()))
-      )
-    : articles
+  // Collect all unique categories
+  const allCategories = [...new Set(articles.flatMap(a => a.categories))].sort()
+
+  let filtered = articles
+
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase()
+    filtered = filtered.filter(a =>
+      a.title.toLowerCase().includes(q) ||
+      a.description.toLowerCase().includes(q) ||
+      a.categories.some(c => c.toLowerCase().includes(q))
+    )
+  }
+
+  if (activeCategory) {
+    filtered = filtered.filter(a => a.categories.includes(activeCategory))
+  }
 
   const display = limit ? filtered.slice(0, limit) : filtered
 
@@ -35,7 +45,7 @@ export default function Articles({ limit, searchQuery = '' }) {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {[1, 2, 3].map(i => (
-            <div key={i} className="card" style={{ height: 100, opacity: 0.3 }} />
+            <div key={i} className="card skeleton-shimmer" style={{ height: 100 }} />
           ))}
         </div>
       </section>
@@ -49,6 +59,41 @@ export default function Articles({ limit, searchQuery = '' }) {
         <h2 className="section-title">{t('articles.title')}</h2>
         <p className="section-desc">{t('articles.desc')}</p>
       </div>
+
+      {/* Category Filter */}
+      {showCategoryFilter && allCategories.length > 0 && (
+        <div style={{
+          display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 32,
+        }}>
+          <button
+            onClick={() => onCategoryChange?.(null)}
+            style={{
+              padding: '6px 16px', borderRadius: 980, fontSize: 13, fontWeight: 500,
+              border: 'none', cursor: 'pointer',
+              background: !activeCategory ? 'var(--text)' : 'var(--bg-card)',
+              color: !activeCategory ? '#fff' : 'var(--text-secondary)',
+              transition: 'all 0.2s',
+            }}
+          >
+            {t('blog.filter.all')}
+          </button>
+          {allCategories.map(cat => (
+            <button
+              key={cat}
+              onClick={() => onCategoryChange?.(activeCategory === cat ? null : cat)}
+              style={{
+                padding: '6px 16px', borderRadius: 980, fontSize: 13, fontWeight: 500,
+                border: 'none', cursor: 'pointer',
+                background: activeCategory === cat ? 'var(--text)' : 'var(--bg-card)',
+                color: activeCategory === cat ? '#fff' : 'var(--text-secondary)',
+                transition: 'all 0.2s',
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {display.map((article, i) => (

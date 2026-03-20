@@ -90,9 +90,24 @@ img { max-width: 100%; display: block; }
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.4; transform: scale(0.85); }
 }
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .animate-in {
   animation: fadeInUp 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+
+/* Skeleton shimmer loading */
+.skeleton-shimmer {
+  background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-card-hover) 50%, var(--bg-card) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite linear;
 }
 
 /* Section System */
@@ -170,6 +185,10 @@ img { max-width: 100%; display: block; }
 
 .btn-primary:hover {
   opacity: 0.85;
+  transform: scale(1.02);
+}
+.btn-primary:active {
+  transform: scale(0.98);
 }
 
 .btn-outline {
@@ -181,6 +200,10 @@ img { max-width: 100%; display: block; }
 .btn-outline:hover {
   background: var(--bg-card);
   border-color: rgba(0,0,0,0.18);
+  transform: scale(1.02);
+}
+.btn-outline:active {
+  transform: scale(0.98);
 }
 
 /* Divider */
