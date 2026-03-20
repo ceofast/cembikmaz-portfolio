@@ -68,11 +68,11 @@ export default function Contact() {
   ]
 
   const inputStyle = {
-    width: '100%', padding: '12px 16px',
-    background: 'var(--bg-card)', border: '1px solid var(--border)',
+    width: '100%', padding: '14px 18px',
+    background: 'var(--bg-elevated)', border: '1px solid var(--border)',
     borderRadius: 'var(--radius-sm)', color: 'var(--text)',
     fontSize: 15, fontFamily: 'var(--font-sans)',
-    outline: 'none', transition: 'border-color 0.2s',
+    outline: 'none', transition: 'all 0.2s ease',
   }
 
   return (
@@ -101,8 +101,8 @@ export default function Contact() {
                 value={form.name}
                 onChange={e => setForm({ ...form, name: e.target.value })}
                 style={inputStyle}
-                onFocus={e => e.target.style.borderColor = 'var(--accent)'}
-                onBlur={e => e.target.style.borderColor = 'var(--border)'}
+                onFocus={e => { e.target.style.borderColor = 'var(--accent)'; e.target.style.boxShadow = '0 0 0 3px rgba(0,113,227,0.1)' }}
+                onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none' }}
               />
             </div>
             <div>
@@ -117,8 +117,8 @@ export default function Contact() {
                 value={form.email}
                 onChange={e => setForm({ ...form, email: e.target.value })}
                 style={inputStyle}
-                onFocus={e => e.target.style.borderColor = 'var(--accent)'}
-                onBlur={e => e.target.style.borderColor = 'var(--border)'}
+                onFocus={e => { e.target.style.borderColor = 'var(--accent)'; e.target.style.boxShadow = '0 0 0 3px rgba(0,113,227,0.1)' }}
+                onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none' }}
               />
             </div>
             <div>
@@ -133,8 +133,8 @@ export default function Contact() {
                 value={form.message}
                 onChange={e => setForm({ ...form, message: e.target.value })}
                 style={{ ...inputStyle, resize: 'vertical', minHeight: 120 }}
-                onFocus={e => e.target.style.borderColor = 'var(--accent)'}
-                onBlur={e => e.target.style.borderColor = 'var(--border)'}
+                onFocus={e => { e.target.style.borderColor = 'var(--accent)'; e.target.style.boxShadow = '0 0 0 3px rgba(0,113,227,0.1)' }}
+                onBlur={e => { e.target.style.borderColor = 'var(--border)'; e.target.style.boxShadow = 'none' }}
               />
             </div>
 

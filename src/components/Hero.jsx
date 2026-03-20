@@ -9,16 +9,16 @@ function AnimatedStat({ value, label, inView }) {
   const count = useCountUp(numericPart, 1800, inView)
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div style={{ textAlign: 'center', padding: '20px 0' }}>
       <div style={{
-        fontSize: 32, fontWeight: 700, color: 'var(--text)',
-        letterSpacing: -1,
+        fontSize: 36, fontWeight: 700, color: 'var(--text)',
+        letterSpacing: -1.5, lineHeight: 1,
       }}>
         {inView ? count : 0}{suffix}
       </div>
       <div style={{
-        fontSize: 12, color: 'var(--text-muted)', marginTop: 4,
-        fontWeight: 500,
+        fontSize: 13, color: 'var(--text-muted)', marginTop: 8,
+        fontWeight: 500, letterSpacing: 0.2,
       }}>{label}</div>
     </div>
   )
@@ -38,44 +38,62 @@ export default function Hero() {
   return (
     <section className="hero-section" aria-label="Hero" style={{
       minHeight: '100vh', display: 'flex', alignItems: 'center',
-      padding: '160px 32px 120px', position: 'relative',
+      padding: '160px 32px 120px', position: 'relative', overflow: 'hidden',
     }}>
+      {/* Subtle mesh gradient background */}
+      <div style={{
+        position: 'absolute', top: '-20%', right: '-10%',
+        width: 800, height: 800, borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(0,113,227,0.04) 0%, transparent 60%)',
+        filter: 'blur(60px)', pointerEvents: 'none',
+      }} />
+      <div style={{
+        position: 'absolute', bottom: '-10%', left: '-10%',
+        width: 600, height: 600, borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(147,51,234,0.03) 0%, transparent 60%)',
+        filter: 'blur(60px)', pointerEvents: 'none',
+      }} />
+
       <div style={{
         maxWidth: 'var(--max-width)', margin: '0 auto', width: '100%',
+        position: 'relative', zIndex: 1,
       }}>
         <div style={{ animation: 'fadeInUp 0.8s cubic-bezier(0.25,0.1,0.25,1)' }}>
           {/* Status pill */}
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             padding: '6px 14px', borderRadius: 980, marginBottom: 32,
-            background: 'rgba(52,199,89,0.08)',
+            background: 'rgba(52,199,89,0.08)', border: '1px solid rgba(52,199,89,0.12)',
           }}>
             <span style={{
               width: 6, height: 6, borderRadius: '50%', background: '#34c759',
               animation: 'pulse-dot 2.5s ease-in-out infinite',
             }} />
             <span style={{
-              fontFamily: 'var(--font-sans)', fontSize: 12, fontWeight: 500,
+              fontSize: 12, fontWeight: 500,
               color: '#248a3d',
             }}>
               {t('hero.badge')}
             </span>
           </div>
 
-          {/* Name */}
+          {/* Name — gradient text */}
           <h1 style={{
-            fontSize: 'clamp(48px, 7vw, 80px)', fontWeight: 700,
-            lineHeight: 1.05, letterSpacing: -3, marginBottom: 24,
-            color: 'var(--text)',
+            fontSize: 'clamp(52px, 8vw, 88px)', fontWeight: 700,
+            lineHeight: 1.02, letterSpacing: -4, marginBottom: 28,
+            background: 'linear-gradient(135deg, #1d1d1f 0%, #1d1d1f 50%, #6e6e73 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
           }}>
             Cem B&#305;kmaz
           </h1>
 
           {/* Title */}
           <p style={{
-            fontSize: 'clamp(20px, 2.5vw, 24px)', fontWeight: 400,
-            color: 'var(--text-secondary)', lineHeight: 1.4,
-            maxWidth: 500, marginBottom: 16,
+            fontSize: 'clamp(20px, 2.5vw, 26px)', fontWeight: 400,
+            color: 'var(--text-secondary)', lineHeight: 1.35,
+            maxWidth: 520, marginBottom: 16,
           }}>
             <span style={{ fontWeight: 600, color: 'var(--text)' }}>{t('hero.title')}</span>{' '}
             {t('hero.titleAnd')}{' '}<span style={{ fontWeight: 600, color: 'var(--text)' }}>{t('hero.title2')}</span>
@@ -83,8 +101,8 @@ export default function Hero() {
 
           {/* Description */}
           <p style={{
-            fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.6,
-            maxWidth: 480, marginBottom: 40,
+            fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65,
+            maxWidth: 500, marginBottom: 44,
           }}>
             {t('hero.desc')}
           </p>
@@ -110,13 +128,21 @@ export default function Hero() {
         {/* Stats */}
         <div ref={statsRef} className="hero-stats" style={{
           display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)',
-          gap: 20, marginTop: 100,
+          marginTop: 100,
+          background: 'var(--bg-soft)',
+          borderRadius: 'var(--radius)',
+          border: '1px solid var(--border)',
+          overflow: 'hidden',
           opacity: statsInView ? 1 : 0,
           transform: statsInView ? 'none' : 'translateY(16px)',
           transition: 'opacity 0.6s ease, transform 0.6s ease',
         }}>
           {stats.map((stat, i) => (
-            <AnimatedStat key={i} value={stat.value} label={stat.label} inView={statsInView} />
+            <div key={i} style={{
+              borderRight: i < 3 ? '1px solid var(--border)' : 'none',
+            }}>
+              <AnimatedStat value={stat.value} label={stat.label} inView={statsInView} />
+            </div>
           ))}
         </div>
       </div>
@@ -130,8 +156,10 @@ export default function Hero() {
           .hero-stats {
             grid-template-columns: repeat(2, 1fr) !important;
             margin-top: 64px !important;
-            gap: 32px 16px !important;
           }
+          .hero-stats > div:nth-child(2) { border-right: none !important; }
+          .hero-stats > div:nth-child(1),
+          .hero-stats > div:nth-child(2) { border-bottom: 1px solid var(--border); }
         }
       `}</style>
     </section>

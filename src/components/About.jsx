@@ -50,8 +50,8 @@ export default function About() {
             display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28,
           }}>
             <div style={{
-              width: 40, height: 40, borderRadius: 10,
-              background: 'rgba(0,113,227,0.06)',
+              width: 42, height: 42, borderRadius: 12,
+              background: 'linear-gradient(135deg, rgba(0,113,227,0.08) 0%, rgba(147,51,234,0.06) 100%)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               color: 'var(--accent)', flexShrink: 0,
             }}>
@@ -95,8 +95,8 @@ export default function About() {
             display: 'flex', alignItems: 'center', gap: 12, marginBottom: 28,
           }}>
             <div style={{
-              width: 40, height: 40, borderRadius: 10,
-              background: 'rgba(0,113,227,0.06)',
+              width: 42, height: 42, borderRadius: 12,
+              background: 'linear-gradient(135deg, rgba(0,113,227,0.08) 0%, rgba(147,51,234,0.06) 100%)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               color: 'var(--accent)', flexShrink: 0,
             }}>

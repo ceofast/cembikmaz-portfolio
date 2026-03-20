@@ -8,24 +8,28 @@ import Consulting from '../components/Consulting'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 
+function SectionBand({ gray, children }) {
+  return (
+    <div style={{
+      background: gray ? 'var(--bg-soft)' : 'var(--bg)',
+      transition: 'background 0.3s ease',
+    }}>
+      {children}
+    </div>
+  )
+}
+
 export default function Home() {
   return (
     <main>
       <Hero />
-      <div className="divider" />
-      <About />
-      <div className="divider" />
-      <Certifications />
-      <div className="divider" />
-      <Experience />
-      <div className="divider" />
-      <Projects />
-      <div className="divider" />
-      <Articles limit={3} />
-      <div className="divider" />
-      <Consulting />
-      <div className="divider" />
-      <Contact />
+      <SectionBand gray><About /></SectionBand>
+      <SectionBand><Certifications /></SectionBand>
+      <SectionBand gray><Experience /></SectionBand>
+      <SectionBand><Projects /></SectionBand>
+      <SectionBand gray><Articles limit={3} /></SectionBand>
+      <SectionBand><Consulting /></SectionBand>
+      <SectionBand gray><Contact /></SectionBand>
       <Footer />
     </main>
   )

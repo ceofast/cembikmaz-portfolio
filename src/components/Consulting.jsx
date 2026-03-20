@@ -40,8 +40,12 @@ export default function Consulting() {
         {services.map((service, i) => (
           <div key={i} className="card" style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{
-              fontSize: 28, fontWeight: 700, color: 'rgba(0,0,0,0.08)',
-              marginBottom: 20, lineHeight: 1,
+              fontSize: 32, fontWeight: 800, lineHeight: 1, marginBottom: 20,
+              background: 'linear-gradient(135deg, var(--accent) 0%, #9333ea 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              opacity: 0.25,
             }}>{service.num}</div>
 
             <h3 style={{
@@ -74,9 +78,11 @@ export default function Consulting() {
 
       {/* CTA */}
       <div className="consulting-cta" style={{
-        marginTop: 24, textAlign: 'center', padding: '48px 32px',
-        background: 'var(--bg-card)',
+        marginTop: 24, textAlign: 'center', padding: '56px 32px',
+        background: 'linear-gradient(135deg, #f5f5f7 0%, #eef2ff 100%)',
         borderRadius: 'var(--radius)',
+        border: '1px solid var(--border)',
+        position: 'relative', overflow: 'hidden',
       }}>
         <h3 style={{
           fontSize: 22, fontWeight: 600, color: 'var(--text)', marginBottom: 10,

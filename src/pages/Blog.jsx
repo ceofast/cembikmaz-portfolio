@@ -35,8 +35,8 @@ export default function Blog() {
               fontSize: 15, fontFamily: 'var(--font-sans)',
               outline: 'none', transition: 'all 0.2s',
             }}
-            onFocus={e => e.target.style.borderColor = 'var(--border-hover)'}
-            onBlur={e => e.target.style.borderColor = 'transparent'}
+            onFocus={e => { e.target.style.borderColor = 'var(--accent)'; e.target.style.boxShadow = '0 0 0 3px rgba(0,113,227,0.1)' }}
+            onBlur={e => { e.target.style.borderColor = 'transparent'; e.target.style.boxShadow = 'none' }}
           />
         </div>
       </div>
