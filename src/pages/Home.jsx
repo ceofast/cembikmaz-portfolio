@@ -4,7 +4,9 @@ import Certifications from '../components/Certifications'
 import Experience from '../components/Experience'
 import Projects from '../components/Projects'
 import Articles from '../components/Articles'
+import Process from '../components/Process'
 import Consulting from '../components/Consulting'
+import FAQ from '../components/FAQ'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 
@@ -27,7 +29,9 @@ export default function Home() {
       <SectionBand><Certifications /></SectionBand>
       <SectionBand gray><Experience /></SectionBand>
       <SectionBand><Projects /></SectionBand>
-      <SectionBand gray><Consulting /></SectionBand>
+      <SectionBand gray><Process /></SectionBand>
+      <SectionBand><Consulting /></SectionBand>
+      <SectionBand gray><FAQ /></SectionBand>
       <SectionBand><Articles limit={3} /></SectionBand>
       <SectionBand gray><Contact /></SectionBand>
       <Footer />

@@ -30,6 +30,7 @@ export default function Hero() {
   const { t } = useTranslation()
   const [statsRef, statsInView] = useInView()
   const [scrollY, setScrollY] = useState(0)
+  const [gh, setGh] = useState({ repos: 63, followers: 335 })
 
   useEffect(() => {
     const onScroll = () => setScrollY(window.scrollY)
@@ -37,11 +38,27 @@ export default function Hero() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    const cached = sessionStorage.getItem('gh-stats')
+    if (cached) { setGh(JSON.parse(cached)); return }
+
+    fetch('https://api.github.com/users/ceofast')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data) {
+          const stats = { repos: data.public_repos, followers: data.followers }
+          setGh(stats)
+          sessionStorage.setItem('gh-stats', JSON.stringify(stats))
+        }
+      })
+      .catch(() => {})
+  }, [])
+
   const stats = [
     { value: '3+', label: t('hero.stat1') },
-    { value: '63', label: t('hero.stat2') },
+    { value: String(gh.repos), label: t('hero.stat2') },
     { value: '5+', label: t('hero.stat3') },
-    { value: '335', label: t('hero.stat4') },
+    { value: String(gh.followers), label: t('hero.stat4') },
   ]
 
   return (
