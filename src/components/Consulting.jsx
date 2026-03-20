@@ -11,18 +11,21 @@ export default function Consulting() {
       desc: t('consulting.s1.desc'),
       items: [t('consulting.s1.i1'), t('consulting.s1.i2'), t('consulting.s1.i3'), t('consulting.s1.i4')],
       num: '01',
+      icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" /><polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" /></svg>,
     },
     {
       title: t('consulting.s2.title'),
       desc: t('consulting.s2.desc'),
       items: [t('consulting.s2.i1'), t('consulting.s2.i2'), t('consulting.s2.i3'), t('consulting.s2.i4')],
       num: '02',
+      icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>,
     },
     {
       title: t('consulting.s3.title'),
       desc: t('consulting.s3.desc'),
       items: [t('consulting.s3.i1'), t('consulting.s3.i2'), t('consulting.s3.i3'), t('consulting.s3.i4')],
       num: '03',
+      icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round"><path d="M4 14a1 1 0 01-.78-1.63l9.9-10.2a.5.5 0 01.86.46l-1.92 6.02A1 1 0 0013 10h7a1 1 0 01.78 1.63l-9.9 10.2a.5.5 0 01-.86-.46l1.92-6.02A1 1 0 0011 14z" /></svg>,
     },
   ]
 
@@ -40,13 +43,19 @@ export default function Consulting() {
         {services.map((service, i) => (
           <div key={i} className="card" style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{
-              fontSize: 32, fontWeight: 800, lineHeight: 1, marginBottom: 20,
-              background: 'linear-gradient(135deg, var(--accent) 0%, #9333ea 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              opacity: 0.25,
-            }}>{service.num}</div>
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              marginBottom: 20,
+            }}>
+              <div style={{
+                width: 44, height: 44, borderRadius: 12,
+                background: 'var(--accent-dim)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>{service.icon}</div>
+              <span style={{
+                fontSize: 28, fontWeight: 700, color: 'var(--border-hover)',
+                lineHeight: 1,
+              }}>{service.num}</span>
+            </div>
 
             <h3 style={{
               fontSize: 17, fontWeight: 600, color: 'var(--text)', marginBottom: 8,

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useTranslation } from '../i18n/LanguageContext'
 import useInView from '../hooks/useInView'
 import useCountUp from '../hooks/useCountUp'
+import RotatingText from './RotatingText'
 
 function AnimatedStat({ value, label, inView }) {
   const numericPart = parseInt(value) || 0
@@ -81,7 +82,7 @@ export default function Hero() {
           <h1 style={{
             fontSize: 'clamp(52px, 8vw, 88px)', fontWeight: 700,
             lineHeight: 1.02, letterSpacing: -4, marginBottom: 28,
-            background: 'linear-gradient(135deg, #1d1d1f 0%, #1d1d1f 50%, #6e6e73 100%)',
+            background: 'linear-gradient(135deg, var(--hero-grad-start) 0%, var(--hero-grad-start) 50%, var(--hero-grad-end) 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
@@ -95,8 +96,11 @@ export default function Hero() {
             color: 'var(--text-secondary)', lineHeight: 1.35,
             maxWidth: 520, marginBottom: 16,
           }}>
-            <span style={{ fontWeight: 600, color: 'var(--text)' }}>{t('hero.title')}</span>{' '}
-            {t('hero.titleAnd')}{' '}<span style={{ fontWeight: 600, color: 'var(--text)' }}>{t('hero.title2')}</span>
+            <RotatingText
+              words={['Data Scientist', 'ML Engineer', 'AI Consultant']}
+              interval={3000}
+              style={{ fontWeight: 600, color: 'var(--text)' }}
+            />
           </p>
 
           {/* Description */}

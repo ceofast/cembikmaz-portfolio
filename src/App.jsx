@@ -55,7 +55,7 @@ function AppContent() {
       <Navbar />
       <ScrollToTop />
       <Suspense fallback={<Loading />}>
-        <div id="main-content">
+        <div id="main-content" className="page-transition" key={location.pathname}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/blog" element={<Blog />} />

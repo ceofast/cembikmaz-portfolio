@@ -18,7 +18,7 @@ export default function BackToTop() {
       style={{
         position: 'fixed', bottom: 32, right: 32, zIndex: 90,
         width: 44, height: 44, borderRadius: '50%',
-        background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)',
+        background: 'var(--glass)', backdropFilter: 'blur(12px)',
         border: '1px solid rgba(0,0,0,0.06)',
         boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
         cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',

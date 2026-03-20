@@ -2,27 +2,52 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useTranslation } from '../i18n/LanguageContext'
 import LanguageSwitcher from './LanguageSwitcher'
+import ThemeToggle from './ThemeToggle'
 
 const navKeys = [
-  { key: 'nav.about', href: '/#about' },
-  { key: 'nav.experience', href: '/#experience' },
-  { key: 'nav.projects', href: '/#projects' },
-  { key: 'nav.blog', href: '/blog' },
-  { key: 'nav.consulting', href: '/#consulting' },
-  { key: 'nav.contact', href: '/#contact' },
+  { key: 'nav.about', href: '/#about', section: 'about' },
+  { key: 'nav.experience', href: '/#experience', section: 'experience' },
+  { key: 'nav.projects', href: '/#projects', section: 'projects' },
+  { key: 'nav.blog', href: '/blog', section: null },
+  { key: 'nav.consulting', href: '/#consulting', section: 'consulting' },
+  { key: 'nav.contact', href: '/#contact', section: 'contact' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState(null)
   const location = useLocation()
   const { t } = useTranslation()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener('scroll', onScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  // Scroll spy
+  useEffect(() => {
+    if (location.pathname !== '/') { setActiveSection(null); return }
+
+    const sections = navKeys
+      .filter(n => n.section)
+      .map(n => document.getElementById(n.section))
+      .filter(Boolean)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter(e => e.isIntersecting)
+        if (visible.length > 0) {
+          setActiveSection(visible[0].target.id)
+        }
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    )
+
+    sections.forEach(s => observer.observe(s))
+    return () => observer.disconnect()
+  }, [location.pathname])
 
   useEffect(() => { setMenuOpen(false) }, [location])
 
@@ -35,11 +60,17 @@ export default function Navbar() {
     }
   }
 
+  const isActive = (link) => {
+    if (link.section && activeSection === link.section) return true
+    if (link.href === '/blog' && location.pathname.startsWith('/blog')) return true
+    return false
+  }
+
   return (
     <nav role="navigation" aria-label="Main navigation" style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-      padding: scrolled ? '12px 32px' : '20px 32px',
-      background: scrolled ? 'rgba(255,255,255,0.85)' : 'transparent',
+      padding: scrolled ? '10px 32px' : '18px 32px',
+      background: scrolled ? 'var(--glass)' : 'transparent',
       backdropFilter: scrolled ? 'blur(20px) saturate(1.8)' : 'none',
       WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(1.8)' : 'none',
       borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
@@ -57,7 +88,7 @@ export default function Navbar() {
         </Link>
 
         <div style={{
-          display: 'flex', alignItems: 'center', gap: 32,
+          display: 'flex', alignItems: 'center', gap: 28,
         }} className="desktop-nav">
           {navKeys.map(link => (
             <Link
@@ -65,19 +96,25 @@ export default function Navbar() {
               to={link.href.startsWith('/#') ? '/' : link.href}
               onClick={(e) => handleNavClick(e, link.href)}
               style={{
-                fontSize: 13, fontWeight: 400, color: 'var(--text-muted)',
+                fontSize: 13, fontWeight: isActive(link) ? 600 : 400,
+                color: isActive(link) ? 'var(--text)' : 'var(--text-muted)',
                 transition: 'color 0.2s',
+                position: 'relative',
               }}
               onMouseEnter={e => e.target.style.color = 'var(--text)'}
-              onMouseLeave={e => e.target.style.color = 'var(--text-muted)'}
+              onMouseLeave={e => { if (!isActive(link)) e.target.style.color = 'var(--text-muted)' }}
             >
               {t(link.key)}
             </Link>
           ))}
-          <LanguageSwitcher />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <ThemeToggle />
+            <LanguageSwitcher />
+          </div>
         </div>
 
         <div className="mobile-controls">
+          <ThemeToggle />
           <LanguageSwitcher />
           <button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -102,7 +139,7 @@ export default function Navbar() {
       {menuOpen && (
         <div style={{
           position: 'absolute', top: '100%', left: 0, right: 0,
-          background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(20px)',
+          background: 'var(--glass-solid)', backdropFilter: 'blur(20px)',
           borderBottom: '1px solid var(--border)', padding: '8px 24px 16px',
           animation: 'slideDown 0.25s ease',
         }}>
@@ -113,7 +150,8 @@ export default function Navbar() {
               onClick={(e) => handleNavClick(e, link.href)}
               style={{
                 display: 'block', padding: '14px 0', fontSize: 16, fontWeight: 500,
-                color: 'var(--text-secondary)', borderBottom: '1px solid var(--border)',
+                color: isActive(link) ? 'var(--text)' : 'var(--text-secondary)',
+                borderBottom: '1px solid var(--border)',
                 animation: `fadeInUp 0.3s ease ${i * 0.04}s both`,
               }}
             >
@@ -124,7 +162,7 @@ export default function Navbar() {
       )}
 
       <style>{`
-        .mobile-controls { display: none; align-items: center; gap: 12px; }
+        .mobile-controls { display: none; align-items: center; gap: 8px; }
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .mobile-controls { display: flex !important; }

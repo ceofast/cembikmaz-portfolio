@@ -46,7 +46,7 @@ export default function LanguageSwitcher() {
       {open && (
         <div style={{
           position: 'absolute', top: 'calc(100% + 6px)', right: 0,
-          background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(20px)',
+          background: 'var(--glass-solid)', backdropFilter: 'blur(20px)',
           border: '1px solid var(--border)', borderRadius: 12,
           padding: 4, minWidth: 110, zIndex: 200,
           boxShadow: '0 8px 30px rgba(0,0,0,0.08)',

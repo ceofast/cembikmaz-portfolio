@@ -37,7 +37,7 @@ export default function CookieConsent() {
     }}>
       <div style={{
         maxWidth: 520, width: '100%',
-        background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(20px)',
+        background: 'var(--glass-solid)', backdropFilter: 'blur(20px)',
         border: '1px solid var(--border)', borderRadius: 'var(--radius)',
         padding: '20px 24px', pointerEvents: 'auto',
         boxShadow: '0 8px 40px rgba(0,0,0,0.08)',
