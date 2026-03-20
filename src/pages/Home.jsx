@@ -27,8 +27,8 @@ export default function Home() {
       <SectionBand><Certifications /></SectionBand>
       <SectionBand gray><Experience /></SectionBand>
       <SectionBand><Projects /></SectionBand>
-      <SectionBand gray><Articles limit={3} /></SectionBand>
-      <SectionBand><Consulting /></SectionBand>
+      <SectionBand gray><Consulting /></SectionBand>
+      <SectionBand><Articles limit={3} /></SectionBand>
       <SectionBand gray><Contact /></SectionBand>
       <Footer />
     </main>
