@@ -79,7 +79,7 @@ export default function Hero() {
           </div>
 
           {/* Name — gradient text */}
-          <h1 style={{
+          <h1 aria-label="Cem Bıkmaz" style={{
             fontSize: 'clamp(52px, 8vw, 88px)', fontWeight: 700,
             lineHeight: 1.02, letterSpacing: -4, marginBottom: 28,
             background: 'linear-gradient(135deg, var(--hero-grad-start) 0%, var(--hero-grad-start) 50%, var(--hero-grad-end) 100%)',

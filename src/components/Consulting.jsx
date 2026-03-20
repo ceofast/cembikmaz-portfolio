@@ -88,7 +88,7 @@ export default function Consulting() {
       {/* CTA */}
       <div className="consulting-cta" style={{
         marginTop: 24, textAlign: 'center', padding: '56px 32px',
-        background: 'linear-gradient(135deg, #f5f5f7 0%, #eef2ff 100%)',
+        background: 'linear-gradient(135deg, var(--bg-card) 0%, var(--accent-dim) 100%)',
         borderRadius: 'var(--radius)',
         border: '1px solid var(--border)',
         position: 'relative', overflow: 'hidden',
@@ -104,7 +104,7 @@ export default function Consulting() {
         }}>
           {t('consulting.ctaDesc')}
         </p>
-        <a href={`mailto:cembikmaz@outlook.com?subject=${t('consulting.emailSubject')}`} className="btn btn-primary">
+        <a href={`mailto:cembikmaz@outlook.com?subject=${encodeURIComponent(t('consulting.emailSubject'))}`} className="btn btn-primary">
           {t('consulting.ctaBtn')}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <path d="M5 12h14M12 5l7 7-7 7" />

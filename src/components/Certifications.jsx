@@ -84,11 +84,15 @@ export default function Certifications() {
         {certData.map((group, gi) => (
           <div key={gi} className="card" style={{ display: 'flex', flexDirection: 'column' }}>
             <div
+              role="button"
+              tabIndex={0}
+              aria-expanded={expanded === gi}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 marginBottom: 20, cursor: 'pointer',
               }}
               onClick={() => setExpanded(expanded === gi ? null : gi)}
+              onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpanded(expanded === gi ? null : gi) } }}
             >
               <div style={{
                 fontSize: 13, fontWeight: 600, color: 'var(--text-muted)',

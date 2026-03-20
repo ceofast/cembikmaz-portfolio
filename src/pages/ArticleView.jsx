@@ -21,6 +21,7 @@ export default function ArticleView() {
         const found = (data.articles || []).find(a => a.slug === slug)
         if (found) {
           setArticle(found)
+          document.title = `${found.title} — Cem Bıkmaz`
         } else {
           setError(true)
         }
@@ -70,9 +71,22 @@ export default function ArticleView() {
     ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling', 'loading'],
   })
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: article.title,
+    author: { '@type': 'Person', name: article.creator || 'Cem Bıkmaz', url: 'https://cembikmaz.com' },
+    datePublished: article.pubDate,
+    description: article.description,
+    url: article.link,
+    wordCount: article.wordCount,
+    keywords: article.categories.join(', '),
+  }
+
   return (
     <main style={{ paddingTop: 100 }}>
       <ReadingProgress />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <article className="section" style={{ maxWidth: 720, paddingBottom: 60 }}>
         {/* Back link */}
         <Link to="/blog" style={{
