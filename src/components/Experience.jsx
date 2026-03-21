@@ -1,23 +1,79 @@
 import { useTranslation } from '../i18n/LanguageContext'
 import useInView from '../hooks/useInView'
 
-const techStack = [
-  { name: 'Python', color: '#3776ab' },
-  { name: 'PyTorch', color: '#ee4c2c' },
-  { name: 'TensorFlow', color: '#ff6f00' },
-  { name: 'Scikit-learn', color: '#f7931e' },
-  { name: 'LangChain', color: '#1c3c3c' },
-  { name: 'FastAPI', color: '#009688' },
-  { name: 'Docker', color: '#2496ed' },
-  { name: 'PostgreSQL', color: '#4169e1' },
-  { name: 'Pandas', color: '#150458' },
-  { name: 'OpenCV', color: '#5c3ee8' },
-  { name: 'Hugging Face', color: '#ffd21e' },
-  { name: 'Apache Spark', color: '#e25a1c' },
-  { name: 'MLflow', color: '#0194e2' },
-  { name: 'Git', color: '#f05032' },
-  { name: 'AWS', color: '#ff9900' },
-  { name: 'Linux', color: '#333' },
+const techCategories = [
+  {
+    labelKey: 'experience.cat.aiml',
+    color: '#ee4c2c',
+    items: [
+      { name: 'PyTorch', color: '#ee4c2c' },
+      { name: 'TensorFlow', color: '#ff6f00' },
+      { name: 'Scikit-learn', color: '#f7931e' },
+      { name: 'Hugging Face', color: '#ffd21e' },
+      { name: 'OpenCV', color: '#5c3ee8' },
+      { name: 'XGBoost', color: '#3a6fb0' },
+    ],
+  },
+  {
+    labelKey: 'experience.cat.llm',
+    color: '#1c3c3c',
+    items: [
+      { name: 'LangChain', color: '#1c3c3c' },
+      { name: 'LlamaIndex', color: '#7c3aed' },
+      { name: 'Vanna AI', color: '#06b6d4' },
+      { name: 'OpenAI API', color: '#412991' },
+      { name: 'CrewAI', color: '#ef4444' },
+      { name: 'RAG / CAG / KAG', color: '#0ea5e9' },
+    ],
+  },
+  {
+    labelKey: 'experience.cat.datascience',
+    color: '#150458',
+    items: [
+      { name: 'Pandas', color: '#150458' },
+      { name: 'NumPy', color: '#4dabcf' },
+      { name: 'Matplotlib', color: '#11557c' },
+      { name: 'Seaborn', color: '#76b7b2' },
+      { name: 'Plotly', color: '#3f4f75' },
+      { name: 'SciPy', color: '#0054a6' },
+    ],
+  },
+  {
+    labelKey: 'experience.cat.databases',
+    color: '#4169e1',
+    items: [
+      { name: 'PostgreSQL', color: '#4169e1' },
+      { name: 'MSSQL', color: '#cc2927' },
+      { name: 'MongoDB', color: '#47a248' },
+      { name: 'Elasticsearch', color: '#fed10a' },
+      { name: 'Qdrant', color: '#dc2626' },
+      { name: 'Redis', color: '#d82c20' },
+    ],
+  },
+  {
+    labelKey: 'experience.cat.cloud',
+    color: '#ff9900',
+    items: [
+      { name: 'AWS', color: '#ff9900' },
+      { name: 'Azure', color: '#0078d4' },
+      { name: 'GCP', color: '#4285f4' },
+      { name: 'Docker', color: '#2496ed' },
+      { name: 'MinIO', color: '#c72c48' },
+      { name: 'Linux', color: '#333' },
+    ],
+  },
+  {
+    labelKey: 'experience.cat.mlops',
+    color: '#0194e2',
+    items: [
+      { name: 'FastAPI', color: '#009688' },
+      { name: 'MLflow', color: '#0194e2' },
+      { name: 'Apache Spark', color: '#e25a1c' },
+      { name: 'Airflow', color: '#017cee' },
+      { name: 'gRPC', color: '#244c5a' },
+      { name: 'Git', color: '#f05032' },
+    ],
+  },
 ]
 
 export default function Experience() {
@@ -72,7 +128,7 @@ export default function Experience() {
 
       {/* Tech Stack */}
       <div className="card" style={{ padding: '28px 30px' }}>
-        <div style={{ marginBottom: 20 }}>
+        <div style={{ marginBottom: 24 }}>
           <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--text)', marginBottom: 4 }}>
             {t('experience.techTitle')}
           </div>
@@ -80,42 +136,65 @@ export default function Experience() {
             {t('experience.techDesc')}
           </div>
         </div>
-        <div style={{
-          display: 'flex', flexWrap: 'wrap', gap: 8,
+
+        <div className="tech-grid" style={{
+          display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20,
         }}>
-          {techStack.map((tech, i) => (
-            <span
-              key={tech.name}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 6,
-                padding: '6px 14px', borderRadius: 980,
-                background: 'var(--bg-soft)',
-                border: '1px solid var(--border)',
-                fontSize: 13, fontWeight: 500, color: 'var(--text-secondary)',
-                transition: 'all 0.2s ease',
-                animation: inView ? `fadeInUp 0.4s ease ${i * 0.03}s both` : 'none',
-                cursor: 'default',
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.borderColor = tech.color
-                e.currentTarget.style.color = tech.color
-                e.currentTarget.style.background = `${tech.color}08`
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'var(--border)'
-                e.currentTarget.style.color = 'var(--text-secondary)'
-                e.currentTarget.style.background = 'var(--bg-soft)'
-              }}
-            >
-              <span style={{
-                width: 6, height: 6, borderRadius: '50%',
-                background: tech.color, flexShrink: 0,
-              }} />
-              {tech.name}
-            </span>
+          {techCategories.map((cat, ci) => (
+            <div key={ci}>
+              <div style={{
+                fontSize: 11, fontWeight: 600, color: 'var(--text-muted)',
+                letterSpacing: 0.5, textTransform: 'uppercase',
+                marginBottom: 10, paddingLeft: 2,
+              }}>
+                {t(cat.labelKey)}
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                {cat.items.map((tech, ti) => (
+                  <span
+                    key={tech.name}
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: 5,
+                      padding: '5px 12px', borderRadius: 980,
+                      background: 'var(--bg-soft)',
+                      border: '1px solid var(--border)',
+                      fontSize: 12, fontWeight: 500, color: 'var(--text-secondary)',
+                      transition: 'all 0.2s ease',
+                      animation: inView ? `fadeInUp 0.4s ease ${(ci * 6 + ti) * 0.02}s both` : 'none',
+                      cursor: 'default',
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.borderColor = tech.color
+                      e.currentTarget.style.color = tech.color
+                      e.currentTarget.style.background = `${tech.color}08`
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.borderColor = 'var(--border)'
+                      e.currentTarget.style.color = 'var(--text-secondary)'
+                      e.currentTarget.style.background = 'var(--bg-soft)'
+                    }}
+                  >
+                    <span style={{
+                      width: 5, height: 5, borderRadius: '50%',
+                      background: tech.color, flexShrink: 0,
+                    }} />
+                    {tech.name}
+                  </span>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .tech-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
+        }
+        @media (max-width: 480px) {
+          .tech-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   )
 }

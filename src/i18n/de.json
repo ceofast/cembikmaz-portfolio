@@ -63,6 +63,12 @@
   "experience.linkedinBtn": "LinkedIn-Profil",
   "experience.techTitle": "Technologie-Stack",
   "experience.techDesc": "Werkzeuge und Technologien, die ich aktiv in meinen Projekten einsetze.",
+  "experience.cat.aiml": "KI & Maschinelles Lernen",
+  "experience.cat.llm": "LLM & NLP",
+  "experience.cat.datascience": "Data Science",
+  "experience.cat.databases": "Datenbanken",
+  "experience.cat.cloud": "Cloud & Infrastruktur",
+  "experience.cat.mlops": "MLOps & API",
 
   "projects.label": "Projekte",
   "projects.title": "Ausgewählte Arbeiten.",
